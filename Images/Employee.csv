@@ -1,0 +1,7 @@
+"Bulk Edit Employee"
+"Employee","Employee Name","New Shift","Target Date"
+"employee","employee_name","new_shift","target_date"
+" "," "," "," mm-dd-yyyy"
+"The CSV format is case sensitive"
+"Do not edit headers which are preset in the template"
+"------"

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="POS_DB" Class="POS_DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.16.10.88;Initial Catalog=POS_DB;Persist Security Info=True;User ID=sa" SettingsObjectName="POS_System.My.MySettings" SettingsPropertyName="POS_DBConnectionString3" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_user" Member="tbl_users">
+    <Type Name="tbl_user">
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="contact" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="account_type" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="account_status" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="image" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="last_login" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="date_created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_medicine_inventory" Member="tbl_medicine_inventories">
+    <Type Name="tbl_medicine_inventory">
+      <Column Name="medicine_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="medicine_code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="medicine_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="brand" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="medicine_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="unit" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="reorder_level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="expiry_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
+      <Column Name="supplier_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date_added" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="is_archived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_account_log" Member="tbl_account_logs">
+    <Type Name="tbl_account_log">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="user_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="time" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="history_log" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_product" Member="tbl_products">
+    <Type Name="tbl_product">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GenericName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BrandName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DrugType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UnitValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CostPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProfitPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SellingPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Insturction" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Packing" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="dateAdded" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_medicine_types" Member="tbl_medicine_types">
+    <Type Name="tbl_medicine_type">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Medicine_Type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_unit_type" Member="tbl_unit_types">
+    <Type Name="tbl_unit_type">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Unit_Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_POSTransactions" Member="tbl_POSTransactions">
+    <Type Name="tbl_POSTransaction">
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="TotalItems" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VatSales" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="VatExemptSales" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalSales" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="VatAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CashReceived" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ChangeAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_POSTransactionDetails" Member="tbl_POSTransactionDetails">
+    <Type Name="tbl_POSTransactionDetail">
+      <Column Name="DetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ProductID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ExtendPrice" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Discount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_Notifications" Member="tbl_Notifications">
+    <Type Name="tbl_Notification">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Seen" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.SP_InsertPOSTransaction" Method="SP_InsertPOSTransaction">
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="TotalItems" Parameter="totalItems" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VatSales" Parameter="vatSales" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="VatExemptSales" Parameter="vatExemptSales" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="TotalSales" Parameter="totalSales" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="VatAmount" Parameter="vatAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="TotalAmount" Parameter="totalAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="PaymentMethod" Parameter="paymentMethod" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CashReceived" Parameter="cashReceived" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="ChangeAmount" Parameter="changeAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="CreatedBy" Parameter="createdBy" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="SP_InsertPOSTransactionResult">
+      <Column Name="TransactionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.SP_InsertPOSTransactionDetails" Method="SP_InsertPOSTransactionDetails">
+    <Parameter Name="TransactionID" Parameter="transactionID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ExtendPrice" Parameter="extendPrice" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="Discount" Parameter="discount" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="Total" Parameter="total" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

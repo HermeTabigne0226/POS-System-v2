@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="POS_DB" Class="POS_DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=172.16.10.88;Initial Catalog=POS_DB;Persist Security Info=True;User ID=sa" SettingsObjectName="POS_System.My.MySettings" SettingsPropertyName="POS_DBConnectionString3" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.16.10.169;Initial Catalog=POS_DB;Persist Security Info=True;User ID=sa" SettingsObjectName="POS_System.My.MySettings" SettingsPropertyName="POS_DBConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbl_user" Member="tbl_users">
     <Type Name="tbl_user">
       <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -14,23 +14,6 @@
       <Column Name="date_created" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_medicine_inventory" Member="tbl_medicine_inventories">
-    <Type Name="tbl_medicine_inventory">
-      <Column Name="medicine_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="medicine_code" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="medicine_name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="brand" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="medicine_type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="unit" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="reorder_level" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="expiry_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="price" Type="System.Decimal" DbType="Decimal(10,2)" CanBeNull="true" />
-      <Column Name="supplier_id" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="date_added" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="is_archived" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_account_log" Member="tbl_account_logs">
     <Type Name="tbl_account_log">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -38,25 +21,6 @@
       <Column Name="date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="time" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="history_log" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_product" Member="tbl_products">
-    <Type Name="tbl_product">
-      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ProductCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="GenericName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="BrandName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="DrugType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Unit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="UnitValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="CostPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ProfitPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="SellingPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ExpiryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="Insturction" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Packing" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Quantity" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="dateAdded" Type="System.DateTime" DbType="Date" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_medicine_types" Member="tbl_medicine_types">
@@ -77,6 +41,53 @@
       <Column Name="UpdatedOn" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.tbl_Notifications" Member="tbl_Notifications">
+    <Type Name="tbl_Notification">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="productID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Seen" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_auditTrail" Member="tbl_auditTrails">
+    <Type Name="tbl_auditTrail">
+      <Column Name="AuditID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActionType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModuleName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="RecordID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="OldValue" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="NewValue" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="PerformedBy" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="UserRole" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IPAddress" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ComputerName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ActionDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbl_product" Member="tbl_products">
+    <Type Name="tbl_product">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GenericName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BrandName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DrugType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Unit" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UnitValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CostPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ProfitPercent" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="SellingPrice" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Instruction" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Packing" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="dateAdded" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="LowStockQty" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_POSTransactions" Member="tbl_POSTransactions">
     <Type Name="tbl_POSTransaction">
       <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -89,6 +100,7 @@
       <Column Name="VatAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="PaymentMethod" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GcashRef" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="CashReceived" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="ChangeAmount" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
@@ -99,7 +111,7 @@
     <Type Name="tbl_POSTransactionDetail">
       <Column Name="DetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TransactionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ProductID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ProductCode" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="ProductName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
       <Column Name="Price" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
       <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -108,35 +120,42 @@
       <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_Notifications" Member="tbl_Notifications">
-    <Type Name="tbl_Notification">
-      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="productID" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Message" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CreatedAt" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Seen" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </Type>
-  </Table>
+  <Function Name="dbo.SP_InsertAuditTrail" Method="SP_InsertAuditTrail">
+    <Parameter Name="ActionType" Parameter="actionType" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ModuleName" Parameter="moduleName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="RecordID" Parameter="recordID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Description" Parameter="description" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="OldValue" Parameter="oldValue" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="NewValue" Parameter="newValue" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="PerformedBy" Parameter="performedBy" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="UserRole" Parameter="userRole" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="IPAddress" Parameter="iPAddress" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ComputerName" Parameter="computerName" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_DELETE_POS_TRANSACTION" Method="SP_DELETE_POS_TRANSACTION">
+    <Parameter Name="TransactionID" Parameter="transactionID" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.SP_InsertPOSTransaction" Method="SP_InsertPOSTransaction">
-    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="CustomerName" Parameter="customerName" Type="System.String" DbType="NVarChar(150)" />
     <Parameter Name="TotalItems" Parameter="totalItems" Type="System.Int32" DbType="Int" />
     <Parameter Name="VatSales" Parameter="vatSales" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="VatExemptSales" Parameter="vatExemptSales" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="TotalSales" Parameter="totalSales" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="VatAmount" Parameter="vatAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="TotalAmount" Parameter="totalAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <Parameter Name="PaymentMethod" Parameter="paymentMethod" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="PaymentMethod" Parameter="paymentMethod" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="CashReceived" Parameter="cashReceived" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="ChangeAmount" Parameter="changeAmount" Type="System.Decimal" DbType="Decimal(18,2)" />
-    <Parameter Name="CreatedBy" Parameter="createdBy" Type="System.String" DbType="VarChar(20)" />
-    <ElementType Name="SP_InsertPOSTransactionResult">
-      <Column Name="TransactionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
+    <Parameter Name="CreatedBy" Parameter="createdBy" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="GcashRef" Parameter="gcashRef" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="NewTransactionID" Parameter="newTransactionID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.SP_InsertPOSTransactionDetails" Method="SP_InsertPOSTransactionDetails">
     <Parameter Name="TransactionID" Parameter="transactionID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="ProductID" Parameter="productID" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="ProductCode" Parameter="productCode" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="ProductName" Parameter="productName" Type="System.String" DbType="VarChar(255)" />
     <Parameter Name="Price" Parameter="price" Type="System.Decimal" DbType="Decimal(18,2)" />
     <Parameter Name="Quantity" Parameter="quantity" Type="System.Int32" DbType="Int" />

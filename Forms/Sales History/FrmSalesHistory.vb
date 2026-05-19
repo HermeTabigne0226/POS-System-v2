@@ -36,26 +36,40 @@ Public Class FrmSalesHistory
 
     Private Sub SetDGV()
 
+        ' ===== VIEW BUTTON =====
         If DGV_SalesHistory.Columns("colView") Is Nothing Then
-            Dim btn As New DataGridViewButtonColumn()
-            btn.Name = "colView"
-            btn.HeaderText = "Action"
-            btn.Text = "View"
-            btn.UseColumnTextForButtonValue = True
-            btn.Width = 50
-            DGV_SalesHistory.Columns.Add(btn)
+            Dim btnView As New DataGridViewButtonColumn()
+            btnView.Name = "colView"
+            btnView.HeaderText = "View"
+            btnView.Text = "View"
+            btnView.UseColumnTextForButtonValue = True
+            btnView.Width = 60
+            btnView.FlatStyle = FlatStyle.Standard
+            DGV_SalesHistory.Columns.Add(btnView)
+        End If
+
+        ' ===== DELETE BUTTON =====
+        If DGV_SalesHistory.Columns("colDelete") Is Nothing Then
+            Dim btnDelete As New DataGridViewButtonColumn()
+            btnDelete.Name = "colDelete"
+            btnDelete.HeaderText = "Delete"   ' no header text (still under Action visually)
+            btnDelete.Text = "Delete"
+            btnDelete.UseColumnTextForButtonValue = True
+            btnDelete.Width = 60
+            btnDelete.FlatStyle = FlatStyle.Standard
+            DGV_SalesHistory.Columns.Add(btnDelete)
         End If
 
         With DGV_SalesHistory
 
             .Columns(0).Width = 30
-            .Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+            .Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             .Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             .Columns(3).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             .Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
             .Columns(5).Width = 150
-            .Columns(6).Visible = false
-            .Columns(7).Width = 100
+            .Columns(6).Width = 150
+            .Columns(7).Visible = False
 
             .Columns(0).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
             .Columns(1).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -63,9 +77,11 @@ Public Class FrmSalesHistory
             .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         End With
 
     End Sub
+
 
     Private currentPage As Integer = 1
     Private totalPages As Integer = 1
@@ -124,6 +140,7 @@ Public Class FrmSalesHistory
             row.TotalAmount,
             row.TotalItems,
             row.PaymentMethod,
+            row.GcashRef,
             row.TransactionID,
             "View")
             i += 1
@@ -133,7 +150,22 @@ Public Class FrmSalesHistory
         lblPageInfo.Text = $"Page {currentPage} of {totalPages}"
 
         UpdatePaginationButtons()
+
         DGV_SalesHistory.ClearSelection()
+        ' Total invoices
+        txtTotalInvoice.Text = totalRecords.ToString()
+
+        ' Total items sold (all invoices)
+        txtTotalItems.Text = SalesHistory.Sum(Function(x) x.TotalItems).ToString()
+
+        txtTotalAmount.Text = SalesHistory.Sum(Function(x) x.TotalAmount).ToString()
+
+        txtCashInvoice.Text =
+    SalesHistory.Where(Function(x) x.PaymentMethod = "Cash").Count().ToString()
+
+        txtGcashInvoice.Text =
+    SalesHistory.Where(Function(x) x.PaymentMethod = "Gcash").Count().ToString()
+
     End Sub
 
 
@@ -187,16 +219,106 @@ Public Class FrmSalesHistory
         LoadSalesHistoryPage()
     End Sub
 
-    Private Sub DGV_SalesHistory_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_SalesHistory.CellContentClick
+    Private Sub DGV_SalesHistory_CellContentClick(
+    sender As Object, e As DataGridViewCellEventArgs
+) Handles DGV_SalesHistory.CellContentClick
+
         If e.RowIndex < 0 Then Exit Sub
 
-        ' Option A: If you fixed column Name = "Actions"
-        If e.ColumnIndex = 7 Then
-            Dim transactionID As String = DGV_SalesHistory.Rows(e.RowIndex).Cells(6).Value.ToString()
+        Dim transactionID As String =
+        DGV_SalesHistory.Rows(e.RowIndex).Cells(7).Value.ToString()
+
+        ' ===== VIEW =====
+        If e.ColumnIndex = 8 Then
             setPrintLayout()
             LoadInvoiceReport(transactionID)
+
+            ' ===== DELETE =====
+        ElseIf e.ColumnIndex = 9 Then
+            ConfirmAndDeleteTransaction(transactionID)
         End If
+
     End Sub
+
+    Private Sub ConfirmAndDeleteTransaction(transactionID As String)
+
+        Dim dlg As New Guna.UI2.WinForms.Guna2MessageDialog With {
+        .Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo,
+        .Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning,
+        .Style = Guna.UI2.WinForms.MessageDialogStyle.Light,
+        .Text = "Are you sure you want to delete this transaction?" & vbCrLf &
+                "This action cannot be undone.",
+        .Caption = "Confirm Delete"
+    }
+
+        If dlg.Show() = DialogResult.Yes Then
+            DeleteTransaction(transactionID)
+        End If
+
+    End Sub
+
+
+    Private Sub DeleteTransaction(transactionID As String)
+
+        Try
+            ' 🔹 1. GET DETAILS BEFORE DELETE (IMPORTANT)
+            Dim trans = (From t In db.tbl_POSTransactions
+                         Where t.TransactionID = transactionID
+                         Select t).FirstOrDefault()
+
+            If trans Is Nothing Then
+                MessageBox.Show("Transaction not found.",
+                            "Warning",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            ' Save values for audit
+            Dim auditDescription As String =
+            $"Deleted POS transaction | Customer: {trans.CustomerName} | " &
+            $"Total: {trans.TotalAmount:N2} | Payment: {trans.PaymentMethod}"
+
+            ' 🔹 2. DELETE (Stored Procedure)
+            db.SP_DELETE_POS_TRANSACTION(transactionID)
+
+            ' 🔹 3. AUDIT TRAIL
+            Dim f As New Functions()
+            f.InsertAuditTrail(
+            "DELETE",
+            "POS Transaction",
+            transactionID,
+            auditDescription,
+            Nothing,                    ' OldValue (optional)
+            Nothing,                    ' NewValue (optional)
+            AdminHome.username.Trim(),
+            AdminHome.Guna2HtmlLabel1.Text
+        )
+
+            ' 🔹 4. REFRESH CONTEXT
+            db = New POS_DBDataContext()
+
+            MessageBox.Show("Transaction deleted successfully.",
+                        "Deleted",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+
+            ' 🔹 5. RELOAD GRID
+            LoadSalesHistoryPage()
+
+        Catch ex As Exception
+            MessageBox.Show("Failed to delete transaction." & vbCrLf & ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
+
+
+
+
 
     Private Sub setPrintLayout()
         DGV_SalesHistory.Visible = False
@@ -214,4 +336,5 @@ Public Class FrmSalesHistory
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles backBtn.Click
         setSalesHistory()
     End Sub
+
 End Class

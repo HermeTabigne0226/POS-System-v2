@@ -27,13 +27,11 @@ Partial Class Login
         Me.Guna2BorderlessForm1 = New Guna.UI2.WinForms.Guna2BorderlessForm(Me.components)
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel2 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2CircleButton1 = New Guna.UI2.WinForms.Guna2CircleButton()
         Me.Guna2ShadowPanel1 = New Guna.UI2.WinForms.Guna2ShadowPanel()
-        Me.noAccountBtn = New System.Windows.Forms.LinkLabel()
         Me.loginBtn = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2CircleButton2 = New Guna.UI2.WinForms.Guna2CircleButton()
@@ -41,21 +39,23 @@ Partial Class Login
         Me.LoginSuccess = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.Guna2AnimateWindow1 = New Guna.UI2.WinForms.Guna2AnimateWindow(Me.components)
         Me.Guna2HtmlToolTip1 = New Guna.UI2.WinForms.Guna2HtmlToolTip()
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.Guna2CirclePictureBox3 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Guna2CirclePictureBox1 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
-        Me.Guna2CirclePictureBox3 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.Guna2CirclePictureBox2 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.txtPassword = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtUsername = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
-        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
+        Me.ConfirmExit = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.Guna2Panel1.SuspendLayout()
         Me.Guna2Panel3.SuspendLayout()
         Me.Guna2Panel2.SuspendLayout()
         Me.Guna2ShadowPanel1.SuspendLayout()
+        CType(Me.Guna2CirclePictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Guna2CirclePictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Guna2CirclePictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -92,25 +92,12 @@ Partial Class Login
         'Guna2Panel3
         '
         Me.Guna2Panel3.BorderColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2Panel3.Controls.Add(Me.Label1)
+        Me.Guna2Panel3.Controls.Add(Me.Guna2CirclePictureBox3)
         Me.Guna2Panel3.Controls.Add(Me.PictureBox1)
         Me.Guna2Panel3.Location = New System.Drawing.Point(829, 414)
         Me.Guna2Panel3.Name = "Guna2Panel3"
-        Me.Guna2Panel3.Size = New System.Drawing.Size(84, 37)
+        Me.Guna2Panel3.Size = New System.Drawing.Size(71, 37)
         Me.Guna2Panel3.TabIndex = 9
-        '
-        'Label1
-        '
-        Me.Label1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Label1.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold)
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(24, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 37)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "Exit App"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Guna2Panel2
         '
@@ -153,6 +140,7 @@ Partial Class Login
         Me.Guna2CircleButton1.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.Guna2CircleButton1.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2CircleButton1.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton1.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.Guna2CircleButton1.Location = New System.Drawing.Point(732, -112)
         Me.Guna2CircleButton1.Name = "Guna2CircleButton1"
         Me.Guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
@@ -162,8 +150,7 @@ Partial Class Login
         'Guna2ShadowPanel1
         '
         Me.Guna2ShadowPanel1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2ShadowPanel1.Controls.Add(Me.Guna2CirclePictureBox3)
-        Me.Guna2ShadowPanel1.Controls.Add(Me.noAccountBtn)
+        Me.Guna2ShadowPanel1.Controls.Add(Me.LinkLabel1)
         Me.Guna2ShadowPanel1.Controls.Add(Me.loginBtn)
         Me.Guna2ShadowPanel1.Controls.Add(Me.Guna2CirclePictureBox2)
         Me.Guna2ShadowPanel1.Controls.Add(Me.txtPassword)
@@ -173,21 +160,8 @@ Partial Class Login
         Me.Guna2ShadowPanel1.Location = New System.Drawing.Point(61, 125)
         Me.Guna2ShadowPanel1.Name = "Guna2ShadowPanel1"
         Me.Guna2ShadowPanel1.ShadowColor = System.Drawing.Color.Black
-        Me.Guna2ShadowPanel1.Size = New System.Drawing.Size(309, 288)
+        Me.Guna2ShadowPanel1.Size = New System.Drawing.Size(309, 251)
         Me.Guna2ShadowPanel1.TabIndex = 0
-        '
-        'noAccountBtn
-        '
-        Me.noAccountBtn.AutoSize = True
-        Me.noAccountBtn.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.noAccountBtn.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
-        Me.noAccountBtn.LinkColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(163, Byte), Integer))
-        Me.noAccountBtn.Location = New System.Drawing.Point(119, 220)
-        Me.noAccountBtn.Name = "noAccountBtn"
-        Me.noAccountBtn.Size = New System.Drawing.Size(70, 13)
-        Me.noAccountBtn.TabIndex = 3
-        Me.noAccountBtn.TabStop = True
-        Me.noAccountBtn.Text = "No Account?"
         '
         'loginBtn
         '
@@ -232,6 +206,7 @@ Partial Class Login
         Me.Guna2CircleButton2.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.Guna2CircleButton2.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.Guna2CircleButton2.ForeColor = System.Drawing.Color.White
+        Me.Guna2CircleButton2.HoverState.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(100, Byte), Integer))
         Me.Guna2CircleButton2.Location = New System.Drawing.Point(-111, 345)
         Me.Guna2CircleButton2.Name = "Guna2CircleButton2"
         Me.Guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
@@ -253,7 +228,7 @@ Partial Class Login
         Me.LoginSuccess.Caption = "Success"
         Me.LoginSuccess.Icon = Guna.UI2.WinForms.MessageDialogIcon.Information
         Me.LoginSuccess.Parent = Me
-        Me.LoginSuccess.Style = Guna.UI2.WinForms.MessageDialogStyle.Dark
+        Me.LoginSuccess.Style = Guna.UI2.WinForms.MessageDialogStyle.Light
         Me.LoginSuccess.Text = "Login successful."
         '
         'Guna2HtmlToolTip1
@@ -267,6 +242,25 @@ Partial Class Login
         Me.Guna2HtmlToolTip1.TitleForeColor = System.Drawing.Color.FromArgb(CType(CType(111, Byte), Integer), CType(CType(127, Byte), Integer), CType(CType(163, Byte), Integer))
         Me.Guna2HtmlToolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
         Me.Guna2HtmlToolTip1.ToolTipTitle = "Set SQL Server"
+        '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.Text = "NotifyIcon1"
+        Me.NotifyIcon1.Visible = True
+        '
+        'Guna2CirclePictureBox3
+        '
+        Me.Guna2CirclePictureBox3.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Guna2CirclePictureBox3.Image = Global.POS_System.My.Resources.Resources.settings2
+        Me.Guna2CirclePictureBox3.ImageRotate = 0!
+        Me.Guna2CirclePictureBox3.Location = New System.Drawing.Point(34, 6)
+        Me.Guna2CirclePictureBox3.Name = "Guna2CirclePictureBox3"
+        Me.Guna2CirclePictureBox3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CirclePictureBox3.Size = New System.Drawing.Size(25, 25)
+        Me.Guna2CirclePictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2CirclePictureBox3.TabIndex = 9
+        Me.Guna2CirclePictureBox3.TabStop = False
+        Me.Guna2HtmlToolTip1.SetToolTip(Me.Guna2CirclePictureBox3, "Click to change database server")
         '
         'PictureBox1
         '
@@ -291,20 +285,6 @@ Partial Class Login
         Me.Guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Guna2CirclePictureBox1.TabIndex = 7
         Me.Guna2CirclePictureBox1.TabStop = False
-        '
-        'Guna2CirclePictureBox3
-        '
-        Me.Guna2CirclePictureBox3.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Guna2CirclePictureBox3.Image = Global.POS_System.My.Resources.Resources.settings2
-        Me.Guna2CirclePictureBox3.ImageRotate = 0!
-        Me.Guna2CirclePictureBox3.Location = New System.Drawing.Point(142, 243)
-        Me.Guna2CirclePictureBox3.Name = "Guna2CirclePictureBox3"
-        Me.Guna2CirclePictureBox3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.Guna2CirclePictureBox3.Size = New System.Drawing.Size(25, 25)
-        Me.Guna2CirclePictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2CirclePictureBox3.TabIndex = 9
-        Me.Guna2CirclePictureBox3.TabStop = False
-        Me.Guna2HtmlToolTip1.SetToolTip(Me.Guna2CirclePictureBox3, "Click to change database server")
         '
         'Guna2CirclePictureBox2
         '
@@ -384,10 +364,29 @@ Partial Class Login
         Me.Guna2PictureBox1.TabIndex = 4
         Me.Guna2PictureBox1.TabStop = False
         '
-        'NotifyIcon1
+        'LinkLabel1
         '
-        Me.NotifyIcon1.Text = "NotifyIcon1"
-        Me.NotifyIcon1.Visible = True
+        Me.LinkLabel1.AutoSize = True
+        Me.LinkLabel1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LinkLabel1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle))
+        Me.LinkLabel1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(146, Byte), Integer))
+        Me.LinkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline
+        Me.LinkLabel1.LinkColor = System.Drawing.Color.FromArgb(CType(CType(114, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(146, Byte), Integer))
+        Me.LinkLabel1.Location = New System.Drawing.Point(125, 211)
+        Me.LinkLabel1.Name = "LinkLabel1"
+        Me.LinkLabel1.Size = New System.Drawing.Size(58, 17)
+        Me.LinkLabel1.TabIndex = 10
+        Me.LinkLabel1.TabStop = True
+        Me.LinkLabel1.Text = "Exit App"
+        '
+        'ConfirmExit
+        '
+        Me.ConfirmExit.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo
+        Me.ConfirmExit.Caption = "Confirm Exit"
+        Me.ConfirmExit.Icon = Guna.UI2.WinForms.MessageDialogIcon.Question
+        Me.ConfirmExit.Parent = Me
+        Me.ConfirmExit.Style = Guna.UI2.WinForms.MessageDialogStyle.Light
+        Me.ConfirmExit.Text = "Click Yes to proceed."
         '
         'Login
         '
@@ -407,9 +406,9 @@ Partial Class Login
         Me.Guna2Panel2.PerformLayout()
         Me.Guna2ShadowPanel1.ResumeLayout(False)
         Me.Guna2ShadowPanel1.PerformLayout()
+        CType(Me.Guna2CirclePictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Guna2CirclePictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Guna2CirclePictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -429,7 +428,6 @@ Partial Class Login
     Friend WithEvents Guna2CircleButton2 As Guna.UI2.WinForms.Guna2CircleButton
     Friend WithEvents txtPassword As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2CirclePictureBox2 As Guna.UI2.WinForms.Guna2CirclePictureBox
-    Friend WithEvents noAccountBtn As LinkLabel
     Friend WithEvents loginBtn As Guna.UI2.WinForms.Guna2Button
     Public WithEvents InvalidAccount As Guna.UI2.WinForms.Guna2MessageDialog
     Friend WithEvents LoginSuccess As Guna.UI2.WinForms.Guna2MessageDialog
@@ -439,6 +437,7 @@ Partial Class Login
     Friend WithEvents Guna2HtmlToolTip1 As Guna.UI2.WinForms.Guna2HtmlToolTip
     Friend WithEvents Guna2Panel3 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Label1 As Label
     Friend WithEvents NotifyIcon1 As NotifyIcon
+    Friend WithEvents LinkLabel1 As LinkLabel
+    Friend WithEvents ConfirmExit As Guna.UI2.WinForms.Guna2MessageDialog
 End Class

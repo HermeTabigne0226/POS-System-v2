@@ -25,10 +25,14 @@ Partial Class POSPayment
         Me.components = New System.ComponentModel.Container()
         Dim ReportDataSource1 As Microsoft.Reporting.WinForms.ReportDataSource = New Microsoft.Reporting.WinForms.ReportDataSource()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(POSPayment))
+        Me.SP_InvoicePrintBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.POS_DBDataSet = New POS_System.POS_DBDataSet()
         Me.Guna2Panel5 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
+        Me.InvoiceID = New System.Windows.Forms.Label()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2Button1 = New Guna.UI2.WinForms.Guna2Button()
-        Me.radioCard = New Guna.UI2.WinForms.Guna2RadioButton()
+        Me.radioGcash = New Guna.UI2.WinForms.Guna2RadioButton()
         Me.radioCash = New Guna.UI2.WinForms.Guna2RadioButton()
         Me.txtChangeAmount = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -36,6 +40,7 @@ Partial Class POSPayment
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TxtCustomerName = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtTotalAmount = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.GcashRef = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
@@ -43,15 +48,21 @@ Partial Class POSPayment
         Me.Guna2MessageDialog1 = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.confirmSave = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.negativeWarning = New Guna.UI2.WinForms.Guna2MessageDialog()
-        Me.ReportViewer1 = New Microsoft.Reporting.WinForms.ReportViewer()
-        Me.InvoiceID = New System.Windows.Forms.Label()
-        Me.POS_DBDataSet = New POS_System.POS_DBDataSet()
-        Me.SP_InvoicePrintBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SP_InvoicePrintTableAdapter = New POS_System.POS_DBDataSetTableAdapters.SP_InvoicePrintTableAdapter()
-        Me.Guna2Panel5.SuspendLayout()
-        CType(Me.POS_DBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SP_InvoicePrintBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.POS_DBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Guna2Panel5.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'SP_InvoicePrintBindingSource
+        '
+        Me.SP_InvoicePrintBindingSource.DataMember = "SP_InvoicePrint"
+        Me.SP_InvoicePrintBindingSource.DataSource = Me.POS_DBDataSet
+        '
+        'POS_DBDataSet
+        '
+        Me.POS_DBDataSet.DataSetName = "POS_DBDataSet"
+        Me.POS_DBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'Guna2Panel5
         '
@@ -60,7 +71,7 @@ Partial Class POSPayment
         Me.Guna2Panel5.Controls.Add(Me.InvoiceID)
         Me.Guna2Panel5.Controls.Add(Me.Guna2Panel1)
         Me.Guna2Panel5.Controls.Add(Me.Guna2Button1)
-        Me.Guna2Panel5.Controls.Add(Me.radioCard)
+        Me.Guna2Panel5.Controls.Add(Me.radioGcash)
         Me.Guna2Panel5.Controls.Add(Me.radioCash)
         Me.Guna2Panel5.Controls.Add(Me.txtChangeAmount)
         Me.Guna2Panel5.Controls.Add(Me.Label2)
@@ -68,6 +79,7 @@ Partial Class POSPayment
         Me.Guna2Panel5.Controls.Add(Me.Label1)
         Me.Guna2Panel5.Controls.Add(Me.TxtCustomerName)
         Me.Guna2Panel5.Controls.Add(Me.txtTotalAmount)
+        Me.Guna2Panel5.Controls.Add(Me.GcashRef)
         Me.Guna2Panel5.Controls.Add(Me.Label4)
         Me.Guna2Panel5.Controls.Add(Me.Label3)
         Me.Guna2Panel5.Controls.Add(Me.Label12)
@@ -79,6 +91,32 @@ Partial Class POSPayment
         Me.Guna2Panel5.Name = "Guna2Panel5"
         Me.Guna2Panel5.Size = New System.Drawing.Size(437, 388)
         Me.Guna2Panel5.TabIndex = 3
+        '
+        'ReportViewer1
+        '
+        ReportDataSource1.Name = "InvoiceDetails"
+        ReportDataSource1.Value = Me.SP_InvoicePrintBindingSource
+        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
+        Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "POS_System.Invoice.rdlc"
+        Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
+        Me.ReportViewer1.Name = "ReportViewer1"
+        Me.ReportViewer1.ServerReport.BearerToken = Nothing
+        Me.ReportViewer1.Size = New System.Drawing.Size(437, 388)
+        Me.ReportViewer1.TabIndex = 6
+        Me.ReportViewer1.Visible = False
+        '
+        'InvoiceID
+        '
+        Me.InvoiceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.InvoiceID.AutoSize = True
+        Me.InvoiceID.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.InvoiceID.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.InvoiceID.Location = New System.Drawing.Point(346, 34)
+        Me.InvoiceID.Name = "InvoiceID"
+        Me.InvoiceID.Size = New System.Drawing.Size(78, 19)
+        Me.InvoiceID.TabIndex = 7
+        Me.InvoiceID.Text = "Customer:"
+        Me.InvoiceID.Visible = False
         '
         'Guna2Panel1
         '
@@ -114,26 +152,26 @@ Partial Class POSPayment
         Me.Guna2Button1.Text = "Print And Save"
         Me.Guna2Button1.UseTransparentBackground = True
         '
-        'radioCard
+        'radioGcash
         '
-        Me.radioCard.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.radioCard.AutoSize = True
-        Me.radioCard.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.radioCard.CheckedState.BorderThickness = 0
-        Me.radioCard.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.radioCard.CheckedState.InnerColor = System.Drawing.Color.White
-        Me.radioCard.CheckedState.InnerOffset = -4
-        Me.radioCard.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.radioCard.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.radioCard.Location = New System.Drawing.Point(366, 129)
-        Me.radioCard.Name = "radioCard"
-        Me.radioCard.Size = New System.Drawing.Size(59, 23)
-        Me.radioCard.TabIndex = 3
-        Me.radioCard.Text = "Card"
-        Me.radioCard.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
-        Me.radioCard.UncheckedState.BorderThickness = 2
-        Me.radioCard.UncheckedState.FillColor = System.Drawing.Color.Transparent
-        Me.radioCard.UncheckedState.InnerColor = System.Drawing.Color.Transparent
+        Me.radioGcash.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.radioGcash.AutoSize = True
+        Me.radioGcash.CheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.radioGcash.CheckedState.BorderThickness = 0
+        Me.radioGcash.CheckedState.FillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.radioGcash.CheckedState.InnerColor = System.Drawing.Color.White
+        Me.radioGcash.CheckedState.InnerOffset = -4
+        Me.radioGcash.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.radioGcash.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.radioGcash.Location = New System.Drawing.Point(359, 129)
+        Me.radioGcash.Name = "radioGcash"
+        Me.radioGcash.Size = New System.Drawing.Size(66, 23)
+        Me.radioGcash.TabIndex = 3
+        Me.radioGcash.Text = "Gcash"
+        Me.radioGcash.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(125, Byte), Integer), CType(CType(137, Byte), Integer), CType(CType(149, Byte), Integer))
+        Me.radioGcash.UncheckedState.BorderThickness = 2
+        Me.radioGcash.UncheckedState.FillColor = System.Drawing.Color.Transparent
+        Me.radioGcash.UncheckedState.InnerColor = System.Drawing.Color.Transparent
         '
         'radioCash
         '
@@ -201,21 +239,21 @@ Partial Class POSPayment
         Me.txtCashReceived.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCashReceived.BorderColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtCashReceived.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtCashReceived.DefaultText = "0.00"
+        Me.txtCashReceived.DefaultText = ""
         Me.txtCashReceived.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
         Me.txtCashReceived.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
         Me.txtCashReceived.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtCashReceived.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtCashReceived.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
         Me.txtCashReceived.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtCashReceived.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashReceived.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold)
         Me.txtCashReceived.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtCashReceived.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtCashReceived.Location = New System.Drawing.Point(282, 211)
         Me.txtCashReceived.Margin = New System.Windows.Forms.Padding(6)
         Me.txtCashReceived.Name = "txtCashReceived"
         Me.txtCashReceived.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtCashReceived.PlaceholderText = ""
+        Me.txtCashReceived.PlaceholderText = "0.00"
         Me.txtCashReceived.SelectedText = ""
         Me.txtCashReceived.Size = New System.Drawing.Size(143, 35)
         Me.txtCashReceived.TabIndex = 1
@@ -284,6 +322,19 @@ Partial Class POSPayment
         Me.txtTotalAmount.Size = New System.Drawing.Size(143, 31)
         Me.txtTotalAmount.TabIndex = 2
         Me.txtTotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'GcashRef
+        '
+        Me.GcashRef.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GcashRef.AutoSize = True
+        Me.GcashRef.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.GcashRef.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.GcashRef.Location = New System.Drawing.Point(15, 346)
+        Me.GcashRef.Name = "GcashRef"
+        Me.GcashRef.Size = New System.Drawing.Size(36, 19)
+        Me.GcashRef.TabIndex = 1
+        Me.GcashRef.Text = "N/A"
+        Me.GcashRef.Visible = False
         '
         'Label4
         '
@@ -359,42 +410,6 @@ Partial Class POSPayment
         Me.negativeWarning.Style = Guna.UI2.WinForms.MessageDialogStyle.Light
         Me.negativeWarning.Text = "Change amount cannot be negative. Please check the cash received."
         '
-        'ReportViewer1
-        '
-        ReportDataSource1.Name = "InvoiceDetails"
-        ReportDataSource1.Value = Me.SP_InvoicePrintBindingSource
-        Me.ReportViewer1.LocalReport.DataSources.Add(ReportDataSource1)
-        Me.ReportViewer1.LocalReport.ReportEmbeddedResource = "POS_System.Invoice.rdlc"
-        Me.ReportViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.ReportViewer1.Name = "ReportViewer1"
-        Me.ReportViewer1.ServerReport.BearerToken = Nothing
-        Me.ReportViewer1.Size = New System.Drawing.Size(437, 388)
-        Me.ReportViewer1.TabIndex = 6
-        Me.ReportViewer1.Visible = False
-        '
-        'InvoiceID
-        '
-        Me.InvoiceID.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.InvoiceID.AutoSize = True
-        Me.InvoiceID.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
-        Me.InvoiceID.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.InvoiceID.Location = New System.Drawing.Point(346, 34)
-        Me.InvoiceID.Name = "InvoiceID"
-        Me.InvoiceID.Size = New System.Drawing.Size(78, 19)
-        Me.InvoiceID.TabIndex = 7
-        Me.InvoiceID.Text = "Customer:"
-        Me.InvoiceID.Visible = False
-        '
-        'POS_DBDataSet
-        '
-        Me.POS_DBDataSet.DataSetName = "POS_DBDataSet"
-        Me.POS_DBDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'SP_InvoicePrintBindingSource
-        '
-        Me.SP_InvoicePrintBindingSource.DataMember = "SP_InvoicePrint"
-        Me.SP_InvoicePrintBindingSource.DataSource = Me.POS_DBDataSet
-        '
         'SP_InvoicePrintTableAdapter
         '
         Me.SP_InvoicePrintTableAdapter.ClearBeforeFill = True
@@ -412,10 +427,10 @@ Partial Class POSPayment
         Me.Name = "POSPayment"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "POSPayment"
+        CType(Me.SP_InvoicePrintBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.POS_DBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel5.ResumeLayout(False)
         Me.Guna2Panel5.PerformLayout()
-        CType(Me.POS_DBDataSet, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.SP_InvoicePrintBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -424,7 +439,7 @@ Partial Class POSPayment
     Friend WithEvents txtTotalAmount As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents radioCard As Guna.UI2.WinForms.Guna2RadioButton
+    Friend WithEvents radioGcash As Guna.UI2.WinForms.Guna2RadioButton
     Friend WithEvents radioCash As Guna.UI2.WinForms.Guna2RadioButton
     Friend WithEvents txtChangeAmount As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label2 As Label
@@ -443,4 +458,5 @@ Partial Class POSPayment
     Friend WithEvents SP_InvoicePrintBindingSource As BindingSource
     Friend WithEvents POS_DBDataSet As POS_DBDataSet
     Friend WithEvents SP_InvoicePrintTableAdapter As POS_DBDataSetTableAdapters.SP_InvoicePrintTableAdapter
+    Friend WithEvents GcashRef As Label
 End Class

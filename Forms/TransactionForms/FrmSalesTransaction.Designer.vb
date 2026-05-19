@@ -27,7 +27,6 @@ Partial Class FrmSalesTransaction
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Guna2Panel1 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox6 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.txtProductCode = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -39,6 +38,7 @@ Partial Class FrmSalesTransaction
         Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.availQty = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -67,22 +67,16 @@ Partial Class FrmSalesTransaction
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Guna2Panel6 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox5 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Guna2Panel7 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox4 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Guna2Panel8 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox3 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Guna2Panel9 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox2 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Guna2Panel10 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Guna2Panel11 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Guna2CirclePictureBox1 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Guna2Panel12 = New Guna.UI2.WinForms.Guna2Panel()
         Me.Guna2CustomGradientPanel1 = New Guna.UI2.WinForms.Guna2CustomGradientPanel()
@@ -92,26 +86,34 @@ Partial Class FrmSalesTransaction
         Me.noProductMsg = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.newTransaction = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.lowStackWarning = New Guna.UI2.WinForms.Guna2MessageDialog()
+        Me.ErrorQty = New Guna.UI2.WinForms.Guna2MessageDialog()
+        Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.Guna2CirclePictureBox1 = New Guna.UI2.WinForms.Guna2CirclePictureBox()
+        Me.Guna2PictureBox2 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.Guna2PictureBox3 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.Guna2PictureBox4 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.Guna2PictureBox5 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.Guna2PictureBox6 = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.Guna2Panel1.SuspendLayout()
-        CType(Me.Guna2PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel2.SuspendLayout()
         CType(Me.Guna2DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel3.SuspendLayout()
         Me.Guna2Panel4.SuspendLayout()
         Me.Guna2Panel5.SuspendLayout()
         Me.Guna2Panel6.SuspendLayout()
-        CType(Me.Guna2PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel7.SuspendLayout()
-        CType(Me.Guna2PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel8.SuspendLayout()
-        CType(Me.Guna2PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel9.SuspendLayout()
-        CType(Me.Guna2PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel10.SuspendLayout()
-        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2Panel11.SuspendLayout()
-        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2CustomGradientPanel1.SuspendLayout()
+        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Guna2PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Guna2Panel1
@@ -133,27 +135,15 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel1.Size = New System.Drawing.Size(975, 77)
         Me.Guna2Panel1.TabIndex = 1
         '
-        'Guna2PictureBox6
-        '
-        Me.Guna2PictureBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2PictureBox6.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Guna2PictureBox6.Image = Global.POS_System.My.Resources.Resources.plus
-        Me.Guna2PictureBox6.ImageRotate = 0!
-        Me.Guna2PictureBox6.Location = New System.Drawing.Point(503, 37)
-        Me.Guna2PictureBox6.Name = "Guna2PictureBox6"
-        Me.Guna2PictureBox6.Size = New System.Drawing.Size(29, 26)
-        Me.Guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox6.TabIndex = 1
-        Me.Guna2PictureBox6.TabStop = False
-        '
         'txtProductCode
         '
-        Me.txtProductCode.Font = New System.Drawing.Font("Segoe UI", 9.5!)
+        Me.txtProductCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.txtProductCode.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtProductCode.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtProductCode.FormattingEnabled = True
-        Me.txtProductCode.Location = New System.Drawing.Point(16, 36)
+        Me.txtProductCode.Location = New System.Drawing.Point(16, 33)
         Me.txtProductCode.Name = "txtProductCode"
-        Me.txtProductCode.Size = New System.Drawing.Size(107, 25)
+        Me.txtProductCode.Size = New System.Drawing.Size(107, 29)
         Me.txtProductCode.TabIndex = 1
         '
         'Label4
@@ -162,7 +152,7 @@ Partial Class FrmSalesTransaction
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.Color.White
-        Me.Label4.Location = New System.Drawing.Point(431, 17)
+        Me.Label4.Location = New System.Drawing.Point(431, 14)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(66, 17)
         Me.Label4.TabIndex = 1
@@ -173,7 +163,7 @@ Partial Class FrmSalesTransaction
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(138, 17)
+        Me.Label3.Location = New System.Drawing.Point(138, 14)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(108, 17)
         Me.Label3.TabIndex = 1
@@ -184,7 +174,7 @@ Partial Class FrmSalesTransaction
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(13, 17)
+        Me.Label2.Location = New System.Drawing.Point(13, 14)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(91, 17)
         Me.Label2.TabIndex = 1
@@ -200,15 +190,16 @@ Partial Class FrmSalesTransaction
         Me.txtAvailableQty.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtAvailableQty.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtAvailableQty.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtAvailableQty.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAvailableQty.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAvailableQty.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtAvailableQty.Location = New System.Drawing.Point(434, 37)
+        Me.txtAvailableQty.Location = New System.Drawing.Point(434, 34)
+        Me.txtAvailableQty.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtAvailableQty.Name = "txtAvailableQty"
         Me.txtAvailableQty.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtAvailableQty.PlaceholderText = ""
         Me.txtAvailableQty.ReadOnly = True
         Me.txtAvailableQty.SelectedText = ""
-        Me.txtAvailableQty.Size = New System.Drawing.Size(63, 24)
+        Me.txtAvailableQty.Size = New System.Drawing.Size(63, 28)
         Me.txtAvailableQty.TabIndex = 0
         '
         'txtItemDesc
@@ -222,16 +213,17 @@ Partial Class FrmSalesTransaction
         Me.txtItemDesc.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtItemDesc.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
         Me.txtItemDesc.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtItemDesc.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtItemDesc.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtItemDesc.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtItemDesc.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtItemDesc.Location = New System.Drawing.Point(141, 37)
+        Me.txtItemDesc.Location = New System.Drawing.Point(141, 34)
+        Me.txtItemDesc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtItemDesc.Name = "txtItemDesc"
         Me.txtItemDesc.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtItemDesc.PlaceholderText = "Item Description"
         Me.txtItemDesc.ReadOnly = True
         Me.txtItemDesc.SelectedText = ""
-        Me.txtItemDesc.Size = New System.Drawing.Size(277, 24)
+        Me.txtItemDesc.Size = New System.Drawing.Size(277, 28)
         Me.txtItemDesc.TabIndex = 0
         '
         'Guna2Panel2
@@ -272,7 +264,7 @@ Partial Class FrmSalesTransaction
         Me.Guna2DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.Guna2DataGridView1.ColumnHeadersHeight = 35
         Me.Guna2DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.Guna2DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7})
+        Me.Guna2DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.availQty, Me.Column4, Me.Column5, Me.Column6, Me.Column7})
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle3.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -337,6 +329,12 @@ Partial Class FrmSalesTransaction
         Me.Column3.HeaderText = "Price"
         Me.Column3.Name = "Column3"
         Me.Column3.ReadOnly = True
+        '
+        'availQty
+        '
+        Me.availQty.HeaderText = "Avail. Qty"
+        Me.availQty.Name = "availQty"
+        Me.availQty.ReadOnly = True
         '
         'Column4
         '
@@ -754,17 +752,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel6.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel6.TabIndex = 3
         '
-        'Guna2PictureBox5
-        '
-        Me.Guna2PictureBox5.Image = Global.POS_System.My.Resources.Resources.exchange
-        Me.Guna2PictureBox5.ImageRotate = 0!
-        Me.Guna2PictureBox5.Location = New System.Drawing.Point(17, 6)
-        Me.Guna2PictureBox5.Name = "Guna2PictureBox5"
-        Me.Guna2PictureBox5.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox5.TabIndex = 2
-        Me.Guna2PictureBox5.TabStop = False
-        '
         'Label19
         '
         Me.Label19.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -789,17 +776,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel7.Name = "Guna2Panel7"
         Me.Guna2Panel7.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel7.TabIndex = 3
-        '
-        'Guna2PictureBox4
-        '
-        Me.Guna2PictureBox4.Image = Global.POS_System.My.Resources.Resources.remove__1_
-        Me.Guna2PictureBox4.ImageRotate = 0!
-        Me.Guna2PictureBox4.Location = New System.Drawing.Point(17, 6)
-        Me.Guna2PictureBox4.Name = "Guna2PictureBox4"
-        Me.Guna2PictureBox4.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox4.TabIndex = 2
-        Me.Guna2PictureBox4.TabStop = False
         '
         'Label18
         '
@@ -826,17 +802,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel8.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel8.TabIndex = 3
         '
-        'Guna2PictureBox3
-        '
-        Me.Guna2PictureBox3.Image = Global.POS_System.My.Resources.Resources.peso1
-        Me.Guna2PictureBox3.ImageRotate = 0!
-        Me.Guna2PictureBox3.Location = New System.Drawing.Point(16, 6)
-        Me.Guna2PictureBox3.Name = "Guna2PictureBox3"
-        Me.Guna2PictureBox3.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox3.TabIndex = 2
-        Me.Guna2PictureBox3.TabStop = False
-        '
         'Label17
         '
         Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -861,17 +826,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel9.Name = "Guna2Panel9"
         Me.Guna2Panel9.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel9.TabIndex = 3
-        '
-        'Guna2PictureBox2
-        '
-        Me.Guna2PictureBox2.Image = Global.POS_System.My.Resources.Resources.count
-        Me.Guna2PictureBox2.ImageRotate = 0!
-        Me.Guna2PictureBox2.Location = New System.Drawing.Point(17, 6)
-        Me.Guna2PictureBox2.Name = "Guna2PictureBox2"
-        Me.Guna2PictureBox2.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox2.TabIndex = 2
-        Me.Guna2PictureBox2.TabStop = False
         '
         'Label16
         '
@@ -898,17 +852,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel10.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel10.TabIndex = 3
         '
-        'Guna2PictureBox1
-        '
-        Me.Guna2PictureBox1.Image = Global.POS_System.My.Resources.Resources.inspection1
-        Me.Guna2PictureBox1.ImageRotate = 0!
-        Me.Guna2PictureBox1.Location = New System.Drawing.Point(17, 6)
-        Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
-        Me.Guna2PictureBox1.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2PictureBox1.TabIndex = 2
-        Me.Guna2PictureBox1.TabStop = False
-        '
         'Label15
         '
         Me.Label15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -933,20 +876,6 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel11.Name = "Guna2Panel11"
         Me.Guna2Panel11.Size = New System.Drawing.Size(324, 41)
         Me.Guna2Panel11.TabIndex = 3
-        '
-        'Guna2CirclePictureBox1
-        '
-        Me.Guna2CirclePictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2CirclePictureBox1.Image = Global.POS_System.My.Resources.Resources.switch
-        Me.Guna2CirclePictureBox1.ImageRotate = 0!
-        Me.Guna2CirclePictureBox1.Location = New System.Drawing.Point(17, 6)
-        Me.Guna2CirclePictureBox1.Name = "Guna2CirclePictureBox1"
-        Me.Guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
-        Me.Guna2CirclePictureBox1.Size = New System.Drawing.Size(28, 28)
-        Me.Guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.Guna2CirclePictureBox1.TabIndex = 0
-        Me.Guna2CirclePictureBox1.TabStop = False
         '
         'Label14
         '
@@ -1038,15 +967,106 @@ Partial Class FrmSalesTransaction
         Me.lowStackWarning.Style = Guna.UI2.WinForms.MessageDialogStyle.Light
         Me.lowStackWarning.Text = "The I"
         '
+        'ErrorQty
+        '
+        Me.ErrorQty.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK
+        Me.ErrorQty.Caption = Nothing
+        Me.ErrorQty.Icon = Guna.UI2.WinForms.MessageDialogIcon.None
+        Me.ErrorQty.Parent = Nothing
+        Me.ErrorQty.Style = Guna.UI2.WinForms.MessageDialogStyle.Light
+        Me.ErrorQty.Text = Nothing
+        '
+        'Guna2PictureBox1
+        '
+        Me.Guna2PictureBox1.Image = Global.POS_System.My.Resources.Resources.inspection1
+        Me.Guna2PictureBox1.ImageRotate = 0!
+        Me.Guna2PictureBox1.Location = New System.Drawing.Point(17, 6)
+        Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
+        Me.Guna2PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox1.TabIndex = 2
+        Me.Guna2PictureBox1.TabStop = False
+        '
+        'Guna2CirclePictureBox1
+        '
+        Me.Guna2CirclePictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2CirclePictureBox1.Image = Global.POS_System.My.Resources.Resources.switch
+        Me.Guna2CirclePictureBox1.ImageRotate = 0!
+        Me.Guna2CirclePictureBox1.Location = New System.Drawing.Point(17, 6)
+        Me.Guna2CirclePictureBox1.Name = "Guna2CirclePictureBox1"
+        Me.Guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle
+        Me.Guna2CirclePictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2CirclePictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2CirclePictureBox1.TabIndex = 0
+        Me.Guna2CirclePictureBox1.TabStop = False
+        '
+        'Guna2PictureBox2
+        '
+        Me.Guna2PictureBox2.Image = Global.POS_System.My.Resources.Resources.count
+        Me.Guna2PictureBox2.ImageRotate = 0!
+        Me.Guna2PictureBox2.Location = New System.Drawing.Point(17, 6)
+        Me.Guna2PictureBox2.Name = "Guna2PictureBox2"
+        Me.Guna2PictureBox2.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox2.TabIndex = 2
+        Me.Guna2PictureBox2.TabStop = False
+        '
+        'Guna2PictureBox3
+        '
+        Me.Guna2PictureBox3.Image = Global.POS_System.My.Resources.Resources.peso1
+        Me.Guna2PictureBox3.ImageRotate = 0!
+        Me.Guna2PictureBox3.Location = New System.Drawing.Point(16, 6)
+        Me.Guna2PictureBox3.Name = "Guna2PictureBox3"
+        Me.Guna2PictureBox3.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox3.TabIndex = 2
+        Me.Guna2PictureBox3.TabStop = False
+        '
+        'Guna2PictureBox4
+        '
+        Me.Guna2PictureBox4.Image = Global.POS_System.My.Resources.Resources.remove__1_
+        Me.Guna2PictureBox4.ImageRotate = 0!
+        Me.Guna2PictureBox4.Location = New System.Drawing.Point(17, 6)
+        Me.Guna2PictureBox4.Name = "Guna2PictureBox4"
+        Me.Guna2PictureBox4.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox4.TabIndex = 2
+        Me.Guna2PictureBox4.TabStop = False
+        '
+        'Guna2PictureBox5
+        '
+        Me.Guna2PictureBox5.Image = Global.POS_System.My.Resources.Resources.exchange
+        Me.Guna2PictureBox5.ImageRotate = 0!
+        Me.Guna2PictureBox5.Location = New System.Drawing.Point(17, 6)
+        Me.Guna2PictureBox5.Name = "Guna2PictureBox5"
+        Me.Guna2PictureBox5.Size = New System.Drawing.Size(28, 28)
+        Me.Guna2PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox5.TabIndex = 2
+        Me.Guna2PictureBox5.TabStop = False
+        '
+        'Guna2PictureBox6
+        '
+        Me.Guna2PictureBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2PictureBox6.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Guna2PictureBox6.Image = Global.POS_System.My.Resources.Resources.plus
+        Me.Guna2PictureBox6.ImageRotate = 0!
+        Me.Guna2PictureBox6.Location = New System.Drawing.Point(503, 34)
+        Me.Guna2PictureBox6.Name = "Guna2PictureBox6"
+        Me.Guna2PictureBox6.Size = New System.Drawing.Size(29, 26)
+        Me.Guna2PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.Guna2PictureBox6.TabIndex = 1
+        Me.Guna2PictureBox6.TabStop = False
+        '
         'FrmSalesTransaction
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1320, 894)
+        Me.Controls.Add(Me.Guna2Panel10)
         Me.Controls.Add(Me.Guna2CustomGradientPanel1)
         Me.Controls.Add(Me.Guna2Panel12)
         Me.Controls.Add(Me.Guna2Panel11)
-        Me.Controls.Add(Me.Guna2Panel10)
         Me.Controls.Add(Me.Guna2Panel9)
         Me.Controls.Add(Me.Guna2Panel8)
         Me.Controls.Add(Me.Guna2Panel7)
@@ -1061,7 +1081,6 @@ Partial Class FrmSalesTransaction
         Me.Text = "Point Of Sale"
         Me.Guna2Panel1.ResumeLayout(False)
         Me.Guna2Panel1.PerformLayout()
-        CType(Me.Guna2PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel2.ResumeLayout(False)
         CType(Me.Guna2DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel3.ResumeLayout(False)
@@ -1071,18 +1090,19 @@ Partial Class FrmSalesTransaction
         Me.Guna2Panel5.ResumeLayout(False)
         Me.Guna2Panel5.PerformLayout()
         Me.Guna2Panel6.ResumeLayout(False)
-        CType(Me.Guna2PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel7.ResumeLayout(False)
-        CType(Me.Guna2PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel8.ResumeLayout(False)
-        CType(Me.Guna2PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel9.ResumeLayout(False)
-        CType(Me.Guna2PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel10.ResumeLayout(False)
-        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2Panel11.ResumeLayout(False)
-        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Guna2CustomGradientPanel1.ResumeLayout(False)
+        CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2CirclePictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Guna2PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1134,13 +1154,6 @@ Partial Class FrmSalesTransaction
     Friend WithEvents Guna2DataGridView1 As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents txtProductCode As ComboBox
     Friend WithEvents Guna2PictureBox6 As Guna.UI2.WinForms.Guna2PictureBox
-    Friend WithEvents Column1 As DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As DataGridViewTextBoxColumn
-    Friend WithEvents Column5 As DataGridViewTextBoxColumn
-    Friend WithEvents Column6 As DataGridViewTextBoxColumn
-    Friend WithEvents Column7 As DataGridViewTextBoxColumn
     Friend WithEvents confirmRemove As Guna.UI2.WinForms.Guna2MessageDialog
     Friend WithEvents warningDuplicate As Guna.UI2.WinForms.Guna2MessageDialog
     Friend WithEvents txtVatAmount As Guna.UI2.WinForms.Guna2TextBox
@@ -1152,4 +1165,13 @@ Partial Class FrmSalesTransaction
     Friend WithEvents Label4 As Label
     Friend WithEvents txtAvailableQty As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents lowStackWarning As Guna.UI2.WinForms.Guna2MessageDialog
+    Friend WithEvents Column1 As DataGridViewTextBoxColumn
+    Friend WithEvents Column2 As DataGridViewTextBoxColumn
+    Friend WithEvents Column3 As DataGridViewTextBoxColumn
+    Friend WithEvents availQty As DataGridViewTextBoxColumn
+    Friend WithEvents Column4 As DataGridViewTextBoxColumn
+    Friend WithEvents Column5 As DataGridViewTextBoxColumn
+    Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents Column7 As DataGridViewTextBoxColumn
+    Friend WithEvents ErrorQty As Guna.UI2.WinForms.Guna2MessageDialog
 End Class

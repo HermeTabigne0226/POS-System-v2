@@ -126,6 +126,8 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -153,6 +155,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>POS_DB.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Database\POS_DB.vb">
+      <DependentUpon>POS_DB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Database\SetDatabase.Designer.vb">
       <DependentUpon>SetDatabase.vb</DependentUpon>
     </Compile>
@@ -165,10 +170,16 @@
     <Compile Include="Forms\AdminHome.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FrmActivityHistory.Designer.vb">
+    <Compile Include="Forms\Activity_History\FrmActivityHistory.Designer.vb">
       <DependentUpon>FrmActivityHistory.vb</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FrmActivityHistory.vb">
+    <Compile Include="Forms\Activity_History\FrmActivityHistory.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Activity_History\FrmAuditValueViewer.designer.vb">
+      <DependentUpon>FrmAuditValueViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Activity_History\FrmAuditValueViewer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\FrmCustomerRecord.Designer.vb">
@@ -238,6 +249,24 @@
     <Compile Include="Forms\TransactionForms\POSPayment.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\TransactionForms\SearchForm.Designer.vb">
+      <DependentUpon>SearchForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TransactionForms\SearchForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TransactionForms\Windows\frmGcashReference.Designer.vb">
+      <DependentUpon>frmGcashReference.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TransactionForms\Windows\frmGcashReference.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TransactionForms\Windows\Quantity.Designer.vb">
+      <DependentUpon>Quantity.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TransactionForms\Windows\Quantity.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Functions\Functions.vb" />
     <Compile Include="GlobalSuppressions.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -269,8 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AdminHome.resx">
       <DependentUpon>AdminHome.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FrmActivityHistory.resx">
+    <EmbeddedResource Include="Forms\Activity_History\FrmActivityHistory.resx">
       <DependentUpon>FrmActivityHistory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmCustomerRecord.resx">
@@ -306,6 +336,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TransactionForms\POSPayment.resx">
       <DependentUpon>POSPayment.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TransactionForms\SearchForm.resx">
+      <DependentUpon>SearchForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TransactionForms\Windows\frmGcashReference.resx">
+      <DependentUpon>frmGcashReference.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TransactionForms\Windows\Quantity.resx">
+      <DependentUpon>Quantity.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -400,6 +439,12 @@
     <None Include="Resources\right_white.png" />
     <Content Include="ezreen.ico" />
     <None Include="Resources\website-under-construction-were-launching-260nw-1753906343 %281%29.jpg" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\Untitled design.png" />
+    <None Include="Resources\Untitled_design-removebg-preview.png" />
+    <None Include="Resources\Untitled_design__1_-removebg-preview.png" />
+    <None Include="Resources\Untitled design %282%29.png" />
+    <None Include="Resources\Untitled_design__2_-removebg-preview.png" />
     <Content Include="SqlServerTypes\Loader.cs" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

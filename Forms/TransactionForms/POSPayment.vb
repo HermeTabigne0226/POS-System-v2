@@ -9,6 +9,9 @@ Public Class POSPayment
 
         TxtCustomerName.Focus()
         Me.ReportViewer1.RefreshReport()
+        ReportViewer1.Visible = False
+        Me.POS_DBDataSet.SP_InvoicePrint.Clear()
+
     End Sub
 
 #Disable Warning IDE1006 ' Naming Styles
@@ -52,11 +55,19 @@ Public Class POSPayment
     Private Sub txtCashReceived_Leave(sender As Object, e As EventArgs) Handles txtCashReceived.Leave
 #Enable Warning IDE1006 ' Naming Styles
         Dim value As Decimal = 0
+
+
+
         If Decimal.TryParse(txtCashReceived.Text, value) Then
-            txtCashReceived.Text = value.ToString("N2")
+            If txtCashReceived.Text.Trim() <> "" Then
+                txtCashReceived.Text = value.ToString("N2")
+            Else
+                txtCashReceived.Text = "0.00"
+            End If
         Else
             txtCashReceived.Text = "0.00"
         End If
+
     End Sub
 
     Private Sub Guna2Button1_Click(sender As Object, e As EventArgs) Handles Guna2Button1.Click
@@ -113,46 +124,71 @@ Public Class POSPayment
     Public totalSales As Decimal
     Public vatAmount As Decimal
     Public createdBy As String
-#Disable Warning IDE1006 ' Naming Styles
-    Private Sub savePOSTransaction()
-#Enable Warning IDE1006 ' Naming Styles
+
+    Private Function savePOSTransaction() As Integer
+
         Dim CustomerName As String = TxtCustomerName.Text
         Dim totalAmount As Decimal = CDec(txtTotalAmount.Text)
 
-        ' Payment Method
-        Dim paymentMethod As String
-        If radioCash.Checked Then
-            paymentMethod = "Cash"
-        ElseIf radioCard.Checked Then
-            paymentMethod = "Card"
-        Else
-            paymentMethod = "Unknown"
-        End If
+        Dim paymentMethod As String =
+        If(radioCash.Checked, "Cash",
+        If(radioGcash.Checked, "Gcash", "Unknown"))
 
         Dim cashReceived As Decimal = CDec(txtCashReceived.Text)
         Dim changeAmount As Decimal = CDec(txtChangeAmount.Text)
 
-
+        Dim newTransactionID As Integer = 0
 
         Try
-            db.SP_InsertPOSTransaction(CustomerName,
-                                       TotalItems,
-                                       vatSales,
-                                       vatExemptSales,
-                                       totalSales,
-                                       vatAmount,
-                                       totalAmount,
-                                       paymentMethod,
-                                       cashReceived,
-                                       changeAmount,
-                                       createdBy)
+            ' 🔹 Save transaction (HEADER)
+            db.SP_InsertPOSTransaction(
+            CustomerName,
+            TotalItems,
+            vatSales,
+            vatExemptSales,
+            totalSales,
+            vatAmount,
+            totalAmount,
+            paymentMethod,
+            cashReceived,
+            changeAmount,
+            createdBy,
+            GcashRef.Text,
+            newTransactionID        ' 🔥 OUTPUT PARAM
+        )
 
-            MessageBox.Show("Transaction saved successfully!", "POS", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            ' 🔹 AUDIT TRAIL (AFTER SUCCESS)
+            Dim f As New Functions()
+
+            f.InsertAuditTrail(
+            "INSERT",
+            "POS Transaction",
+            newTransactionID.ToString(),
+            "Created POS transaction | Total: " & totalAmount.ToString("N2") &
+            " | Payment: " & paymentMethod,
+            Nothing,                    ' OldValue
+            Nothing,                    ' NewValue
+            AdminHome.username.Trim(),
+            AdminHome.Guna2HtmlLabel1.Text
+        )
+
+            MessageBox.Show("Transaction saved successfully!",
+                        "POS",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
 
         Catch ex As Exception
-            MessageBox.Show("Error saving transaction: " & ex.Message, "POS Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving transaction: " & ex.Message,
+                        "POS Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
         End Try
-    End Sub
+
+        Return newTransactionID
+
+    End Function
+
+
 
     Private Sub Guna2Button1_MouseHover(sender As Object, e As EventArgs) Handles Guna2Button1.MouseHover
 
@@ -192,24 +228,94 @@ Public Class POSPayment
     End Sub
 
 
-    Private Sub POSPayment_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
-        TxtCustomerName.Clear()
-        radioCash.Checked = True
-        txtCashReceived.Text = 0.00
+
+    Private Sub SaveTransactions()
+
+        ' 1️⃣ SAVE HEADER
+        Dim transactionID As Integer = savePOSTransaction()
+        If transactionID <= 0 Then
+            MessageBox.Show("Header not saved.", "POS Error")
+            Exit Sub
+        End If
+
+        ' 2️⃣ GET SALES FORM
+        Dim frm As FrmSalesTransaction =
+        Application.OpenForms.OfType(Of FrmSalesTransaction).FirstOrDefault()
+
+        If frm Is Nothing Then
+            MessageBox.Show("Sales form not found.", "POS Error")
+            Exit Sub
+        End If
+
+        ' 🔥 IMPORTANT: COPY GRID REFERENCE NOW
+        Dim dgv As DataGridView = frm.Guna2DataGridView1
+
+        If dgv.Rows.Cast(Of DataGridViewRow)().
+        All(Function(r) r.IsNewRow) Then
+
+            MessageBox.Show("No rows in grid to save.", "DEBUG")
+            Exit Sub
+        End If
+
+        Try
+            ' 3️⃣ SAVE DETAILS (GRID MUST STILL HAVE DATA)
+            Dim success As Boolean =
+            frm.InsertPOSDetails(dgv, transactionID)
+
+            If Not success Then Exit Sub
+
+            ' 4️⃣ UPDATE STOCK
+            frm.UpdateProductQuantities(dgv)
+
+            ' 5️⃣ PRINT (AFTER SAVE)
+            setPrintLayout()
+            LoadInvoiceReport(transactionID.ToString())
+
+            ' 6️⃣ RESET UI LAST (VERY LAST)
+            'frm.ResetTransaction()
+            ResetPayment()
+
+        Catch ex As Exception
+            MessageBox.Show("Transaction failed: " & ex.Message,
+                        "POS Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
+        End Try
 
     End Sub
 
-    Private Sub SaveTransactions()
-        savePOSTransaction()
 
-        Dim frm As FrmSalesTransaction = Application.OpenForms.OfType(Of FrmSalesTransaction).FirstOrDefault()
 
-        If frm IsNot Nothing Then
-            frm.InsertPOSDetails(frm.txtInvoiceNo.Text, frm.Guna2DataGridView1)
-            FrmSalesTransaction.UpdateProductQuantities(frm.Guna2DataGridView1)
+
+    Public Sub ResetPayment()
+
+        ' Clear text fields
+        TxtCustomerName.Clear()
+        txtCashReceived.Text = "0.00"
+        txtChangeAmount.Text = "0.00"
+
+        ' Reset radio buttons
+        radioCash.Checked = True
+        radioGcash.Checked = False
+
+        ' Reset totals
+        txtTotalAmount.Text = "0.00"
+
+
+    End Sub
+
+
+
+
+
+
+    Private Sub radioGcash_CheckedChanged(sender As Object, e As EventArgs) Handles radioGcash.CheckedChanged
+        If radioGcash.Checked = True Then
+            frmGcashReference.ShowDialog()
         End If
+    End Sub
 
-        setPrintLayout()
-        LoadInvoiceReport(InvoiceID.Text)
+    Private Sub POSPayment_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        ReportViewer1.Visible = False
     End Sub
 End Class

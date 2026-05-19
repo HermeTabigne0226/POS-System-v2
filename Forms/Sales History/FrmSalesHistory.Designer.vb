@@ -36,27 +36,16 @@ Partial Class FrmSalesHistory
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
         Me.backBtn = New Guna.UI2.WinForms.Guna2Button()
         Me.DGV_SalesHistory = New Guna.UI2.WinForms.Guna2DataGridView()
-        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.printInvoice = New Microsoft.Reporting.WinForms.ReportViewer()
         Me.Guna2Panel5 = New Guna.UI2.WinForms.Guna2Panel()
         Me.txtTotalAmount = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.txtVatAmount = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.txtTotalSales = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.txtVatExemptSales = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.txtVatSales = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtGcashInvoice = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtCashInvoice = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtTotalItems = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.txtTotalItems = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -65,17 +54,26 @@ Partial Class FrmSalesHistory
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Guna2Panel6 = New Guna.UI2.WinForms.Guna2Panel()
         Me.lblPageInfo = New System.Windows.Forms.Label()
-        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.cmbRows = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.txtInvoiceNo = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.SP_InvoicePrintTableAdapter = New POS_System.POS_DBDataSetTableAdapters.SP_InvoicePrintTableAdapter()
         Me.BtnNext = New Guna.UI2.WinForms.Guna2ImageButton()
         Me.BtnLastPage = New Guna.UI2.WinForms.Guna2ImageButton()
         Me.BtnPrev = New Guna.UI2.WinForms.Guna2ImageButton()
         Me.BtnFirstPage = New Guna.UI2.WinForms.Guna2ImageButton()
+        Me.Guna2Panel2 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.cmbRows = New System.Windows.Forms.ComboBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
+        Me.txtTotalInvoice = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.SP_InvoicePrintTableAdapter = New POS_System.POS_DBDataSetTableAdapters.SP_InvoicePrintTableAdapter()
+        Me.Column1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GcashRef = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Column7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ConfirmDelete = New Guna.UI2.WinForms.Guna2MessageDialog()
         CType(Me.SP_InvoicePrintBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.POS_DBDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Guna2CustomGradientPanel1.SuspendLayout()
@@ -192,7 +190,7 @@ Partial Class FrmSalesHistory
         Me.DGV_SalesHistory.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DGV_SalesHistory.ColumnHeadersHeight = 35
         Me.DGV_SalesHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.DGV_SalesHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.Column7})
+        Me.DGV_SalesHistory.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Column1, Me.Column2, Me.Column3, Me.Column4, Me.Column5, Me.Column6, Me.GcashRef, Me.Column7})
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.Color.White
         DataGridViewCellStyle7.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -240,48 +238,6 @@ Partial Class FrmSalesHistory
         Me.DGV_SalesHistory.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.DGV_SalesHistory.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.White
         '
-        'Column1
-        '
-        Me.Column1.HeaderText = "No."
-        Me.Column1.Name = "Column1"
-        Me.Column1.ReadOnly = True
-        '
-        'Column2
-        '
-        Me.Column2.HeaderText = "Date"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        '
-        'Column3
-        '
-        Me.Column3.HeaderText = "Customer"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        '
-        'Column4
-        '
-        Me.Column4.HeaderText = "Total Amount"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        '
-        'Column5
-        '
-        Me.Column5.HeaderText = "Total Items"
-        Me.Column5.Name = "Column5"
-        Me.Column5.ReadOnly = True
-        '
-        'Column6
-        '
-        Me.Column6.HeaderText = "Payment Method"
-        Me.Column6.Name = "Column6"
-        Me.Column6.ReadOnly = True
-        '
-        'Column7
-        '
-        Me.Column7.HeaderText = "TransactionID"
-        Me.Column7.Name = "Column7"
-        Me.Column7.ReadOnly = True
-        '
         'printInvoice
         '
         Me.printInvoice.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -303,17 +259,13 @@ Partial Class FrmSalesHistory
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
         Me.Guna2Panel5.Controls.Add(Me.txtTotalAmount)
-        Me.Guna2Panel5.Controls.Add(Me.txtVatAmount)
-        Me.Guna2Panel5.Controls.Add(Me.txtTotalSales)
-        Me.Guna2Panel5.Controls.Add(Me.txtVatExemptSales)
-        Me.Guna2Panel5.Controls.Add(Me.Label21)
-        Me.Guna2Panel5.Controls.Add(Me.txtVatSales)
+        Me.Guna2Panel5.Controls.Add(Me.txtGcashInvoice)
+        Me.Guna2Panel5.Controls.Add(Me.txtCashInvoice)
+        Me.Guna2Panel5.Controls.Add(Me.txtTotalItems)
         Me.Guna2Panel5.Controls.Add(Me.Label20)
         Me.Guna2Panel5.Controls.Add(Me.Label12)
         Me.Guna2Panel5.Controls.Add(Me.Label13)
-        Me.Guna2Panel5.Controls.Add(Me.txtTotalItems)
         Me.Guna2Panel5.Controls.Add(Me.Label9)
-        Me.Guna2Panel5.Controls.Add(Me.Label10)
         Me.Guna2Panel5.Controls.Add(Me.Label11)
         Me.Guna2Panel5.CustomBorderColor = System.Drawing.Color.Silver
         Me.Guna2Panel5.CustomBorderThickness = New System.Windows.Forms.Padding(8)
@@ -337,133 +289,102 @@ Partial Class FrmSalesHistory
         Me.txtTotalAmount.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTotalAmount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtTotalAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalAmount.Location = New System.Drawing.Point(124, 215)
+        Me.txtTotalAmount.Location = New System.Drawing.Point(127, 154)
         Me.txtTotalAmount.Margin = New System.Windows.Forms.Padding(6, 6, 6, 6)
         Me.txtTotalAmount.Name = "txtTotalAmount"
         Me.txtTotalAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtTotalAmount.PlaceholderText = ""
+        Me.txtTotalAmount.ReadOnly = True
         Me.txtTotalAmount.SelectedText = ""
         Me.txtTotalAmount.Size = New System.Drawing.Size(186, 37)
         Me.txtTotalAmount.TabIndex = 2
         Me.txtTotalAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtVatAmount
+        'txtGcashInvoice
         '
-        Me.txtVatAmount.BorderColor = System.Drawing.Color.Gray
-        Me.txtVatAmount.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtVatAmount.DefaultText = "116.00"
-        Me.txtVatAmount.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtVatAmount.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtVatAmount.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatAmount.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatAmount.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.txtVatAmount.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatAmount.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVatAmount.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtVatAmount.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatAmount.Location = New System.Drawing.Point(157, 178)
-        Me.txtVatAmount.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtVatAmount.Name = "txtVatAmount"
-        Me.txtVatAmount.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtVatAmount.PlaceholderText = ""
-        Me.txtVatAmount.SelectedText = ""
-        Me.txtVatAmount.Size = New System.Drawing.Size(154, 24)
-        Me.txtVatAmount.TabIndex = 2
-        Me.txtVatAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtGcashInvoice.BorderColor = System.Drawing.Color.Gray
+        Me.txtGcashInvoice.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtGcashInvoice.DefaultText = "116.00"
+        Me.txtGcashInvoice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtGcashInvoice.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtGcashInvoice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtGcashInvoice.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtGcashInvoice.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
+        Me.txtGcashInvoice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtGcashInvoice.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtGcashInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtGcashInvoice.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtGcashInvoice.Location = New System.Drawing.Point(159, 123)
+        Me.txtGcashInvoice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtGcashInvoice.Name = "txtGcashInvoice"
+        Me.txtGcashInvoice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtGcashInvoice.PlaceholderText = ""
+        Me.txtGcashInvoice.ReadOnly = True
+        Me.txtGcashInvoice.SelectedText = ""
+        Me.txtGcashInvoice.Size = New System.Drawing.Size(154, 24)
+        Me.txtGcashInvoice.TabIndex = 2
+        Me.txtGcashInvoice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtTotalSales
+        'txtCashInvoice
         '
-        Me.txtTotalSales.BorderColor = System.Drawing.Color.Gray
-        Me.txtTotalSales.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtTotalSales.DefaultText = "116.00"
-        Me.txtTotalSales.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtTotalSales.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtTotalSales.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalSales.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalSales.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.txtTotalSales.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalSales.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotalSales.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtTotalSales.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalSales.Location = New System.Drawing.Point(156, 146)
-        Me.txtTotalSales.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtTotalSales.Name = "txtTotalSales"
-        Me.txtTotalSales.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtTotalSales.PlaceholderText = ""
-        Me.txtTotalSales.SelectedText = ""
-        Me.txtTotalSales.Size = New System.Drawing.Size(154, 24)
-        Me.txtTotalSales.TabIndex = 2
-        Me.txtTotalSales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtCashInvoice.BorderColor = System.Drawing.Color.Gray
+        Me.txtCashInvoice.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtCashInvoice.DefaultText = "116.00"
+        Me.txtCashInvoice.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtCashInvoice.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtCashInvoice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtCashInvoice.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtCashInvoice.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
+        Me.txtCashInvoice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtCashInvoice.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCashInvoice.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtCashInvoice.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtCashInvoice.Location = New System.Drawing.Point(159, 92)
+        Me.txtCashInvoice.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCashInvoice.Name = "txtCashInvoice"
+        Me.txtCashInvoice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtCashInvoice.PlaceholderText = ""
+        Me.txtCashInvoice.ReadOnly = True
+        Me.txtCashInvoice.SelectedText = ""
+        Me.txtCashInvoice.Size = New System.Drawing.Size(154, 24)
+        Me.txtCashInvoice.TabIndex = 2
+        Me.txtCashInvoice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'txtVatExemptSales
+        'txtTotalItems
         '
-        Me.txtVatExemptSales.BorderColor = System.Drawing.Color.Gray
-        Me.txtVatExemptSales.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtVatExemptSales.DefaultText = "116.00"
-        Me.txtVatExemptSales.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtVatExemptSales.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtVatExemptSales.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatExemptSales.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatExemptSales.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.txtVatExemptSales.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatExemptSales.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVatExemptSales.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtVatExemptSales.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatExemptSales.Location = New System.Drawing.Point(156, 114)
-        Me.txtVatExemptSales.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtVatExemptSales.Name = "txtVatExemptSales"
-        Me.txtVatExemptSales.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtVatExemptSales.PlaceholderText = ""
-        Me.txtVatExemptSales.SelectedText = ""
-        Me.txtVatExemptSales.Size = New System.Drawing.Size(154, 24)
-        Me.txtVatExemptSales.TabIndex = 2
-        Me.txtVatExemptSales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.Label21.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label21.Location = New System.Drawing.Point(16, 184)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(72, 13)
-        Me.Label21.TabIndex = 1
-        Me.Label21.Text = "Vat Amount:"
-        '
-        'txtVatSales
-        '
-        Me.txtVatSales.BorderColor = System.Drawing.Color.Gray
-        Me.txtVatSales.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtVatSales.DefaultText = "116.00"
-        Me.txtVatSales.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtVatSales.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtVatSales.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatSales.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtVatSales.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.txtVatSales.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatSales.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtVatSales.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtVatSales.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtVatSales.Location = New System.Drawing.Point(156, 84)
-        Me.txtVatSales.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtVatSales.Name = "txtVatSales"
-        Me.txtVatSales.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtVatSales.PlaceholderText = ""
-        Me.txtVatSales.SelectedText = ""
-        Me.txtVatSales.Size = New System.Drawing.Size(154, 24)
-        Me.txtVatSales.TabIndex = 2
-        Me.txtVatSales.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtTotalItems.BorderColor = System.Drawing.Color.Gray
+        Me.txtTotalItems.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtTotalItems.DefaultText = "116.00"
+        Me.txtTotalItems.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtTotalItems.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtTotalItems.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalItems.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtTotalItems.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
+        Me.txtTotalItems.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalItems.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalItems.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtTotalItems.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtTotalItems.Location = New System.Drawing.Point(159, 61)
+        Me.txtTotalItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtTotalItems.Name = "txtTotalItems"
+        Me.txtTotalItems.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtTotalItems.PlaceholderText = ""
+        Me.txtTotalItems.ReadOnly = True
+        Me.txtTotalItems.SelectedText = ""
+        Me.txtTotalItems.Size = New System.Drawing.Size(154, 24)
+        Me.txtTotalItems.TabIndex = 2
+        Me.txtTotalItems.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label20
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
         Me.Label20.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label20.Location = New System.Drawing.Point(15, 152)
+        Me.Label20.Location = New System.Drawing.Point(17, 129)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(64, 13)
+        Me.Label20.Size = New System.Drawing.Size(124, 13)
         Me.Label20.TabIndex = 1
-        Me.Label20.Text = "Total Sales:"
+        Me.Label20.Text = "Total GCash Invoice/s :"
         '
         'Label12
         '
@@ -471,7 +392,7 @@ Partial Class FrmSalesHistory
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Bold)
         Me.Label12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label12.Location = New System.Drawing.Point(15, 222)
+        Me.Label12.Location = New System.Drawing.Point(17, 163)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(103, 19)
         Me.Label12.TabIndex = 1
@@ -482,57 +403,22 @@ Partial Class FrmSalesHistory
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
         Me.Label13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label13.Location = New System.Drawing.Point(15, 120)
+        Me.Label13.Location = New System.Drawing.Point(17, 98)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(98, 13)
+        Me.Label13.Size = New System.Drawing.Size(116, 13)
         Me.Label13.TabIndex = 1
-        Me.Label13.Text = "Vat-Exempt Sales:"
-        '
-        'txtTotalItems
-        '
-        Me.txtTotalItems.BorderColor = System.Drawing.Color.Gray
-        Me.txtTotalItems.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtTotalItems.DefaultText = "1000"
-        Me.txtTotalItems.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtTotalItems.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtTotalItems.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalItems.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtTotalItems.FillColor = System.Drawing.Color.FromArgb(CType(CType(216, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(242, Byte), Integer))
-        Me.txtTotalItems.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalItems.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTotalItems.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.txtTotalItems.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtTotalItems.Location = New System.Drawing.Point(156, 54)
-        Me.txtTotalItems.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.txtTotalItems.Name = "txtTotalItems"
-        Me.txtTotalItems.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtTotalItems.PlaceholderText = ""
-        Me.txtTotalItems.SelectedText = ""
-        Me.txtTotalItems.Size = New System.Drawing.Size(154, 24)
-        Me.txtTotalItems.TabIndex = 2
-        Me.txtTotalItems.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Label13.Text = "Total Cash Invoice/s :"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
         Me.Label9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label9.Location = New System.Drawing.Point(15, 90)
+        Me.Label9.Location = New System.Drawing.Point(17, 67)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 13)
+        Me.Label9.Size = New System.Drawing.Size(79, 13)
         Me.Label9.TabIndex = 1
-        Me.Label9.Text = "Vat Sales:"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.Label10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Label10.Location = New System.Drawing.Point(15, 60)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(66, 13)
-        Me.Label10.TabIndex = 1
-        Me.Label10.Text = "Total Items:"
+        Me.Label9.Text = "Total Items/s :"
         '
         'Label11
         '
@@ -627,89 +513,6 @@ Partial Class FrmSalesHistory
         Me.lblPageInfo.Text = "Page 1 of 10"
         Me.lblPageInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Guna2Panel2
-        '
-        Me.Guna2Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2Panel2.Controls.Add(Me.cmbRows)
-        Me.Guna2Panel2.Controls.Add(Me.Label6)
-        Me.Guna2Panel2.Controls.Add(Me.Guna2Panel6)
-        Me.Guna2Panel2.Controls.Add(Me.Label4)
-        Me.Guna2Panel2.Controls.Add(Me.ToDate)
-        Me.Guna2Panel2.Controls.Add(Me.FromDate)
-        Me.Guna2Panel2.Controls.Add(Me.Label2)
-        Me.Guna2Panel2.Controls.Add(Me.Label3)
-        Me.Guna2Panel2.CustomBorderColor = System.Drawing.Color.Silver
-        Me.Guna2Panel2.CustomBorderThickness = New System.Windows.Forms.Padding(8)
-        Me.Guna2Panel2.Location = New System.Drawing.Point(14, 107)
-        Me.Guna2Panel2.Name = "Guna2Panel2"
-        Me.Guna2Panel2.Size = New System.Drawing.Size(975, 77)
-        Me.Guna2Panel2.TabIndex = 7
-        '
-        'cmbRows
-        '
-        Me.cmbRows.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmbRows.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbRows.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.cmbRows.FormattingEnabled = True
-        Me.cmbRows.Items.AddRange(New Object() {"10", "20", "30", "40", "50"})
-        Me.cmbRows.Location = New System.Drawing.Point(684, 37)
-        Me.cmbRows.Name = "cmbRows"
-        Me.cmbRows.Size = New System.Drawing.Size(48, 25)
-        Me.cmbRows.TabIndex = 9
-        '
-        'Label6
-        '
-        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(630, 42)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(48, 15)
-        Me.Label6.TabIndex = 8
-        Me.Label6.Text = "Rows"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Guna2Panel4
-        '
-        Me.Guna2Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Guna2Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2Panel4.Controls.Add(Me.txtInvoiceNo)
-        Me.Guna2Panel4.Controls.Add(Me.Label5)
-        Me.Guna2Panel4.CustomBorderColor = System.Drawing.Color.Silver
-        Me.Guna2Panel4.CustomBorderThickness = New System.Windows.Forms.Padding(8)
-        Me.Guna2Panel4.Location = New System.Drawing.Point(995, 107)
-        Me.Guna2Panel4.Name = "Guna2Panel4"
-        Me.Guna2Panel4.Size = New System.Drawing.Size(324, 77)
-        Me.Guna2Panel4.TabIndex = 10
-        '
-        'txtInvoiceNo
-        '
-        Me.txtInvoiceNo.AutoSize = True
-        Me.txtInvoiceNo.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInvoiceNo.ForeColor = System.Drawing.Color.White
-        Me.txtInvoiceNo.Location = New System.Drawing.Point(151, 24)
-        Me.txtInvoiceNo.Name = "txtInvoiceNo"
-        Me.txtInvoiceNo.Size = New System.Drawing.Size(97, 30)
-        Me.txtInvoiceNo.TabIndex = 1
-        Me.txtInvoiceNo.Text = "1000000"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.Color.White
-        Me.Label5.Location = New System.Drawing.Point(13, 24)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(132, 30)
-        Me.Label5.TabIndex = 1
-        Me.Label5.Text = "Invoice No :"
-        '
-        'SP_InvoicePrintTableAdapter
-        '
-        Me.SP_InvoicePrintTableAdapter.ClearBeforeFill = True
-        '
         'BtnNext
         '
         Me.BtnNext.BackColor = System.Drawing.Color.Transparent
@@ -786,6 +589,148 @@ Partial Class FrmSalesHistory
         Me.BtnFirstPage.TabIndex = 4
         Me.BtnFirstPage.UseTransparentBackground = True
         '
+        'Guna2Panel2
+        '
+        Me.Guna2Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2Panel2.Controls.Add(Me.cmbRows)
+        Me.Guna2Panel2.Controls.Add(Me.Label6)
+        Me.Guna2Panel2.Controls.Add(Me.Guna2Panel6)
+        Me.Guna2Panel2.Controls.Add(Me.Label4)
+        Me.Guna2Panel2.Controls.Add(Me.ToDate)
+        Me.Guna2Panel2.Controls.Add(Me.FromDate)
+        Me.Guna2Panel2.Controls.Add(Me.Label2)
+        Me.Guna2Panel2.Controls.Add(Me.Label3)
+        Me.Guna2Panel2.CustomBorderColor = System.Drawing.Color.Silver
+        Me.Guna2Panel2.CustomBorderThickness = New System.Windows.Forms.Padding(8)
+        Me.Guna2Panel2.Location = New System.Drawing.Point(14, 107)
+        Me.Guna2Panel2.Name = "Guna2Panel2"
+        Me.Guna2Panel2.Size = New System.Drawing.Size(975, 77)
+        Me.Guna2Panel2.TabIndex = 7
+        '
+        'cmbRows
+        '
+        Me.cmbRows.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmbRows.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbRows.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbRows.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.cmbRows.FormattingEnabled = True
+        Me.cmbRows.Items.AddRange(New Object() {"10", "20", "30", "40", "50"})
+        Me.cmbRows.Location = New System.Drawing.Point(684, 37)
+        Me.cmbRows.Name = "cmbRows"
+        Me.cmbRows.Size = New System.Drawing.Size(48, 25)
+        Me.cmbRows.TabIndex = 9
+        '
+        'Label6
+        '
+        Me.Label6.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(630, 42)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(48, 15)
+        Me.Label6.TabIndex = 8
+        Me.Label6.Text = "Rows"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Guna2Panel4
+        '
+        Me.Guna2Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Guna2Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2Panel4.Controls.Add(Me.txtTotalInvoice)
+        Me.Guna2Panel4.Controls.Add(Me.Label5)
+        Me.Guna2Panel4.CustomBorderColor = System.Drawing.Color.Silver
+        Me.Guna2Panel4.CustomBorderThickness = New System.Windows.Forms.Padding(8)
+        Me.Guna2Panel4.Location = New System.Drawing.Point(995, 107)
+        Me.Guna2Panel4.Name = "Guna2Panel4"
+        Me.Guna2Panel4.Size = New System.Drawing.Size(324, 77)
+        Me.Guna2Panel4.TabIndex = 10
+        '
+        'txtTotalInvoice
+        '
+        Me.txtTotalInvoice.AutoSize = True
+        Me.txtTotalInvoice.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalInvoice.ForeColor = System.Drawing.Color.White
+        Me.txtTotalInvoice.Location = New System.Drawing.Point(187, 24)
+        Me.txtTotalInvoice.Name = "txtTotalInvoice"
+        Me.txtTotalInvoice.Size = New System.Drawing.Size(25, 30)
+        Me.txtTotalInvoice.TabIndex = 1
+        Me.txtTotalInvoice.Text = "0"
+        Me.txtTotalInvoice.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.Color.White
+        Me.Label5.Location = New System.Drawing.Point(13, 24)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(168, 30)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Total Invoice/s :"
+        '
+        'SP_InvoicePrintTableAdapter
+        '
+        Me.SP_InvoicePrintTableAdapter.ClearBeforeFill = True
+        '
+        'Column1
+        '
+        Me.Column1.HeaderText = "No."
+        Me.Column1.Name = "Column1"
+        Me.Column1.ReadOnly = True
+        '
+        'Column2
+        '
+        Me.Column2.HeaderText = "Date"
+        Me.Column2.Name = "Column2"
+        Me.Column2.ReadOnly = True
+        '
+        'Column3
+        '
+        Me.Column3.HeaderText = "Customer"
+        Me.Column3.Name = "Column3"
+        Me.Column3.ReadOnly = True
+        '
+        'Column4
+        '
+        Me.Column4.HeaderText = "Total Amount"
+        Me.Column4.Name = "Column4"
+        Me.Column4.ReadOnly = True
+        '
+        'Column5
+        '
+        Me.Column5.HeaderText = "Total Items"
+        Me.Column5.Name = "Column5"
+        Me.Column5.ReadOnly = True
+        '
+        'Column6
+        '
+        Me.Column6.HeaderText = "Payment Method"
+        Me.Column6.Name = "Column6"
+        Me.Column6.ReadOnly = True
+        '
+        'GcashRef
+        '
+        Me.GcashRef.HeaderText = "Gcash Ref No"
+        Me.GcashRef.Name = "GcashRef"
+        Me.GcashRef.ReadOnly = True
+        '
+        'Column7
+        '
+        Me.Column7.HeaderText = "TransactionID"
+        Me.Column7.Name = "Column7"
+        Me.Column7.ReadOnly = True
+        '
+        'ConfirmDelete
+        '
+        Me.ConfirmDelete.Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK
+        Me.ConfirmDelete.Caption = Nothing
+        Me.ConfirmDelete.Icon = Guna.UI2.WinForms.MessageDialogIcon.None
+        Me.ConfirmDelete.Parent = Me
+        Me.ConfirmDelete.Style = Guna.UI2.WinForms.MessageDialogStyle.[Default]
+        Me.ConfirmDelete.Text = Nothing
+        '
         'FrmSalesHistory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -820,16 +765,12 @@ Partial Class FrmSalesHistory
     Friend WithEvents Label1 As Label
     Friend WithEvents Guna2Panel3 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2Panel5 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents txtVatAmount As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents txtTotalSales As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents txtVatExemptSales As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents Label21 As Label
-    Friend WithEvents txtVatSales As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtGcashInvoice As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtCashInvoice As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtTotalItems As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label20 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents txtTotalItems As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
@@ -849,18 +790,20 @@ Partial Class FrmSalesHistory
     Friend WithEvents Label12 As Label
     Friend WithEvents DGV_SalesHistory As Guna.UI2.WinForms.Guna2DataGridView
     Friend WithEvents Guna2Panel4 As Guna.UI2.WinForms.Guna2Panel
-    Friend WithEvents txtInvoiceNo As Label
+    Friend WithEvents txtTotalInvoice As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents SP_InvoicePrintBindingSource As BindingSource
     Friend WithEvents POS_DBDataSet As POS_DBDataSet
     Friend WithEvents SP_InvoicePrintTableAdapter As POS_DBDataSetTableAdapters.SP_InvoicePrintTableAdapter
     Friend WithEvents printInvoice As Microsoft.Reporting.WinForms.ReportViewer
+    Friend WithEvents backBtn As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents Column1 As DataGridViewTextBoxColumn
     Friend WithEvents Column2 As DataGridViewTextBoxColumn
     Friend WithEvents Column3 As DataGridViewTextBoxColumn
     Friend WithEvents Column4 As DataGridViewTextBoxColumn
     Friend WithEvents Column5 As DataGridViewTextBoxColumn
     Friend WithEvents Column6 As DataGridViewTextBoxColumn
+    Friend WithEvents GcashRef As DataGridViewTextBoxColumn
     Friend WithEvents Column7 As DataGridViewTextBoxColumn
-    Friend WithEvents backBtn As Guna.UI2.WinForms.Guna2Button
+    Friend WithEvents ConfirmDelete As Guna.UI2.WinForms.Guna2MessageDialog
 End Class

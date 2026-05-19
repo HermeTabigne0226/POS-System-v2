@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class AdminHome
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class AdminHome
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AdminHome))
@@ -56,12 +56,12 @@ Partial Class AdminHome
         Me.TxtFormLabel = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.iconPicture = New Guna.UI2.WinForms.Guna2PictureBox()
         Me.panelParent = New Guna.UI2.WinForms.Guna2Panel()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ConfirmLogout = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.LogoutMsg = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.Guna2NotificationPaint1 = New Guna.UI2.WinForms.Guna2NotificationPaint(Me.components)
         Me.NotificationTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Guna2Panel2.SuspendLayout()
         Me.Guna2Panel8.SuspendLayout()
         CType(Me.logoutBtn, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,9 +106,9 @@ Partial Class AdminHome
         Me.Guna2Panel8.CustomBorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.Guna2Panel8.CustomBorderThickness = New System.Windows.Forms.Padding(0, 1, 0, 1)
         Me.Guna2Panel8.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Guna2Panel8.Location = New System.Drawing.Point(0, 701)
+        Me.Guna2Panel8.Location = New System.Drawing.Point(0, 688)
         Me.Guna2Panel8.Name = "Guna2Panel8"
-        Me.Guna2Panel8.Size = New System.Drawing.Size(166, 45)
+        Me.Guna2Panel8.Size = New System.Drawing.Size(166, 58)
         Me.Guna2Panel8.TabIndex = 1
         '
         'logoutBtn
@@ -116,9 +116,9 @@ Partial Class AdminHome
         Me.logoutBtn.Cursor = System.Windows.Forms.Cursors.Hand
         Me.logoutBtn.Image = Global.POS_System.My.Resources.Resources.logout
         Me.logoutBtn.ImageRotate = 0!
-        Me.logoutBtn.Location = New System.Drawing.Point(-1, 5)
+        Me.logoutBtn.Location = New System.Drawing.Point(-1, 3)
         Me.logoutBtn.Name = "logoutBtn"
-        Me.logoutBtn.Size = New System.Drawing.Size(166, 36)
+        Me.logoutBtn.Size = New System.Drawing.Size(166, 51)
         Me.logoutBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.logoutBtn.TabIndex = 6
         Me.logoutBtn.TabStop = False
@@ -186,6 +186,7 @@ Partial Class AdminHome
         Me.Guna2TabControl1.Controls.Add(Me.logsBtn)
         Me.Guna2TabControl1.Controls.Add(Me.UserAccountsBtn)
         Me.Guna2TabControl1.Controls.Add(Me.SettingsBtn)
+        Me.Guna2TabControl1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2TabControl1.ImageList = Me.ImageList1
         Me.Guna2TabControl1.ItemSize = New System.Drawing.Size(170, 50)
         Me.Guna2TabControl1.Location = New System.Drawing.Point(0, 155)
@@ -216,6 +217,7 @@ Partial Class AdminHome
         'dashboardBtn
         '
         Me.dashboardBtn.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.dashboardBtn.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dashboardBtn.ImageIndex = 5
         Me.dashboardBtn.Location = New System.Drawing.Point(174, 4)
         Me.dashboardBtn.Name = "dashboardBtn"
@@ -489,10 +491,6 @@ Partial Class AdminHome
         Me.panelParent.Size = New System.Drawing.Size(1234, 775)
         Me.panelParent.TabIndex = 3
         '
-        'Timer1
-        '
-        Me.Timer1.Enabled = True
-        '
         'ConfirmLogout
         '
         Me.ConfirmLogout.Buttons = Guna.UI2.WinForms.MessageDialogButtons.YesNo
@@ -531,6 +529,10 @@ Partial Class AdminHome
         '
         Me.NotificationTimer.Enabled = True
         Me.NotificationTimer.Interval = 10000
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
         '
         'AdminHome
         '
@@ -590,7 +592,6 @@ Partial Class AdminHome
     Friend WithEvents Guna2Panel7 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents Guna2Panel6 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents dateLabel As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents Timer1 As Timer
     Friend WithEvents timeLabel As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2Panel8 As Guna.UI2.WinForms.Guna2Panel
     Friend WithEvents logoutBtn As Guna.UI2.WinForms.Guna2PictureBox
@@ -601,4 +602,5 @@ Partial Class AdminHome
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents Guna2NotificationPaint1 As Guna.UI2.WinForms.Guna2NotificationPaint
     Friend WithEvents NotificationTimer As Timer
+    Friend WithEvents Timer1 As Timer
 End Class

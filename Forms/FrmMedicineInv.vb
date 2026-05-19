@@ -12,28 +12,29 @@ Public Class FrmMedicineInv
 
 
     Private Sub setDGV()
-#Enable Warning IDE1006 ' Naming Styles
-        ' Setup DateTimePicker
-        txtExprDate.Text = Date.Today.ToString("yyyy-MM-dd")
-        txtExprDate.MinDate = New DateTime(DateTime.Today.Year, 1, 1)
 
-
-        ' Hide ID column
         If DGV_MedicineList.Columns.Contains("ID") Then
             DGV_MedicineList.Columns("ID").Visible = False
         End If
 
-        ' Format Date Added column
-        If DGV_MedicineList.Columns.Contains("dateAdded") Then
-            DGV_MedicineList.Columns("dateAdded").HeaderText = "Date Added"
-            DGV_MedicineList.Columns("dateAdded").DefaultCellStyle.Format = "MM-dd-yyyy"
-        End If
+        With DGV_MedicineList.Columns
+            .Item("Medicine_Code").HeaderText = "Mcode"
+            .Item("Medicine_Name").HeaderText = "Medicine Name"
+            .Item("Brand_Name").HeaderText = "Brand Name"
+            .Item("Medicine_Type").HeaderText = "Type"
+            .Item("Unit").HeaderText = "Unit"
+            .Item("Unit_Value").HeaderText = "Unit Value"
+            .Item("Cost_Price").HeaderText = "Cost Price"
+            .Item("Profit_Percent").HeaderText = "Profit Percent"
+            .Item("Selling_Price").HeaderText = "Selling Price"
+            .Item("Expiry_Date").HeaderText = "Expiry Date"
+            .Item("Quantity").HeaderText = "Quantity"
+            .Item("dateAdded").HeaderText = "Date Added"
+            .Item("LowStockQty").HeaderText = "Low Stock Qty"
+        End With
 
-        ' Format Expiry Date column
-        If DGV_MedicineList.Columns.Contains("Expiry_Date") Then
-            DGV_MedicineList.Columns("Expiry_Date").HeaderText = "Expiry Date"
-            DGV_MedicineList.Columns("Expiry_Date").DefaultCellStyle.Format = "MM-dd-yyyy"
-        End If
+        DGV_MedicineList.Columns("Expiry_Date").DefaultCellStyle.Format = "MM-dd-yyyy"
+        DGV_MedicineList.Columns("dateAdded").DefaultCellStyle.Format = "MM-dd-yyyy"
 
     End Sub
 
@@ -44,6 +45,7 @@ Public Class FrmMedicineInv
         txtMType.Items.Add("Type")
 
         Dim tbl_medicine = From t1 In db.tbl_medicine_types
+                           Where t1.Status = "Active"
                            Order By t1.Medicine_Type Ascending
                            Select t1.Medicine_Type
 
@@ -59,8 +61,10 @@ Public Class FrmMedicineInv
         txtMUnit.Items.Add("Unit")
 
         Dim tbl_unit = From t1 In db.tbl_unit_types
+                       Where t1.Status = "Active"
                        Order By t1.Unit_Name Ascending
                        Select t1.Unit_Name
+
 
         For Each UnitName In tbl_unit
             txtMUnit.Items.Add(UnitName)
@@ -89,7 +93,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             .Quantity = t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -102,35 +107,95 @@ Public Class FrmMedicineInv
 
     Private Sub saveMedicine()
         Try
+            ' -------------------------------
+            ' VALIDATE & PARSE SAFELY
+            ' -------------------------------
+            Dim costPrice As Decimal
+            Dim sellingPrice As Decimal
+            Dim profitPercent As Decimal
+            Dim quantity As Integer
+            Dim lowStockQty As Integer
 
+            If Not Decimal.TryParse(txtPrice.Text, costPrice) Then
+                MessageBox.Show("Invalid cost price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
 
+            If Not Decimal.TryParse(txtSellingPrice.Text, sellingPrice) Then
+                MessageBox.Show("Invalid selling price.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If Not Decimal.TryParse(txtProfit.Text, profitPercent) Then
+                MessageBox.Show("Invalid profit percent.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If Not Integer.TryParse(txtQuantity.Text, quantity) Then
+                MessageBox.Show("Invalid quantity.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            If Not Integer.TryParse(txtLowStockQty.Text, lowStockQty) Then
+                MessageBox.Show("Invalid low stock quantity.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            ' -------------------------------
+            ' CREATE ENTITY
+            ' -------------------------------
             Dim newProduct As New tbl_product With {
                 .ProductCode = txtMCode.Text.Trim(),
                 .GenericName = txtMName.Text.Trim(),
                 .BrandName = txtBrand.Text.Trim(),
-                .DrugType = txtMType.Text,
-                .Unit = txtMUnit.Text,
-                .UnitValue = txtUnitValue.Text,
-                .CostPrice = Decimal.Parse(txtPrice.Text),
-                .ProfitPercent = txtPercent.Text,
-                .SellingPrice = Decimal.Parse(txtSellingPrice.Text),
+                .DrugType = txtMType.Text.Trim(),
+                .Unit = txtMUnit.Text.Trim(),
+                .UnitValue = txtUnitValue.Text.Trim(),
+                .CostPrice = costPrice,
+                .ProfitPercent = profitPercent,
+                .SellingPrice = sellingPrice,
                 .ExpiryDate = txtExprDate.Value.Date,
-                .Quantity = Integer.Parse(txtQuantity.Text),
+                .Quantity = quantity,
+                .LowStockQty = lowStockQty,
                 .dateAdded = DateTime.Now
             }
 
-
+            ' -------------------------------
+            ' SAVE TO DB
+            ' -------------------------------
             db.tbl_products.InsertOnSubmit(newProduct)
             db.SubmitChanges()
 
-            MessageBox.Show("Medicine saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Medicine saved successfully!",
+                            "Success",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information)
 
             LoadMedicineInventory()
             ClearFields()
 
+            ' -------------------------------
+            ' AUDIT TRAIL (ONLY ON SUCCESS)
+            ' -------------------------------
+            Dim f As New Functions()
+            f.InsertAuditTrail(
+                "INSERT",
+                "Medicine",
+                newProduct.ProductCode,
+                $"Added new medicine: {newProduct.BrandName} ({newProduct.GenericName})",
+                Nothing,
+                Nothing,
+                AdminHome.username.Trim(),
+                AdminHome.Guna2HtmlLabel1.Text
+            )
+
         Catch ex As Exception
-            MessageBox.Show("Error saving medicine: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving medicine: " & ex.Message,
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
         End Try
+
     End Sub
 
     Private Sub ClearFields()
@@ -141,10 +206,11 @@ Public Class FrmMedicineInv
         txtMUnit.SelectedIndex = 1
         txtUnitValue.Clear()
         txtPrice.Text = ""
-        txtPercent.Clear()
+        txtProfit.Clear()
         txtSellingPrice.Clear()
         txtExprDate.Value = DateTime.Now
         txtQuantity.Text = "0"
+        txtLowStockQty.Text = "0"
     End Sub
 
     Private Sub saveBtn_Click(sender As Object, e As EventArgs) Handles saveBtn.Click
@@ -184,27 +250,37 @@ Public Class FrmMedicineInv
     Private Sub setUpdateButtons()
 
         searchBtn.Enabled = False
-        ClearBtn.Enabled = False
-        saveBtn.Enabled = False
-        reloadBtn.Enabled = False
+        'ClearBtn.Enabled = False
+        'saveBtn.Enabled = False
+        'reloadBtn.Enabled = False
 
 
-        DeleteBtn.Enabled = True
-        UpdateBtn.Enabled = True
-        CancelBtn.Enabled = True
+        'DeleteBtn.Enabled = True
+        'UpdateBtn.Enabled = True
+        'CancelBtn.Enabled = True
+
+
+
+        UDC_Panel.Visible = True
+        SCR_Panel.Visible = False
 
     End Sub
 
 
     Private Sub setDefaultButtons()
         searchBtn.Enabled = True
-        ClearBtn.Enabled = True
-        saveBtn.Enabled = True
-        reloadBtn.Enabled = True
+        'ClearBtn.Enabled = True
+        'saveBtn.Enabled = True
+        'reloadBtn.Enabled = True
 
-        DeleteBtn.Enabled = False
-        UpdateBtn.Enabled = False
-        CancelBtn.Enabled = False
+        'DeleteBtn.Enabled = False
+        'UpdateBtn.Enabled = False
+        'CancelBtn.Enabled = False
+
+
+        UDC_Panel.Visible = False
+        SCR_Panel.Visible = True
+
     End Sub
 
 
@@ -214,7 +290,6 @@ Public Class FrmMedicineInv
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = DGV_MedicineList.Rows(e.RowIndex)
 
-            ' Fill the textboxes with row values
             txtMID.Text = row.Cells(0).Value?.ToString()
             txtMCode.Text = row.Cells(1).Value?.ToString()
             txtMName.Text = row.Cells(2).Value?.ToString()
@@ -223,18 +298,16 @@ Public Class FrmMedicineInv
             txtMUnit.Text = row.Cells(5).Value?.ToString()
             txtUnitValue.Text = row.Cells(6).Value?.ToString()
             txtPrice.Text = Convert.ToDecimal(row.Cells(7).Value).ToString("N2")
-            txtPercent.Text = Convert.ToDecimal(row.Cells(8).Value).ToString("N2")
+            txtProfit.Text = Convert.ToDecimal(row.Cells(8).Value).ToString("N2")
             txtSellingPrice.Text = Convert.ToDecimal(row.Cells(9).Value).ToString("N2")
-            txtExprDate.Value = Convert.ToDateTime(row.Cells(10).Value)
+
+            Dim expDate As DateTime = Convert.ToDateTime(row.Cells(10).Value)
+            txtExprDate.Value = If(expDate < txtExprDate.MinDate, txtExprDate.MinDate, expDate)
+
             txtQuantity.Text = row.Cells(11).Value?.ToString()
-
-
-            'txtReorderLvl.Text = row.Cells(7).Value?.ToString()
-            'txtExprDate.Value = Convert.ToDateTime(row.Cells(8).Value)
-            'txtPrice.Text = Convert.ToDecimal(row.Cells(9).Value).ToString("N2")
-            'TxtSupplier.Text = row.Cells(10).Value?.ToString()
-
+            txtLowStockQty.Text = row.Cells(13).Value?.ToString()
         End If
+
     End Sub
 
     Private Sub Guna2Button3_Click(sender As Object, e As EventArgs) Handles ClearBtn.Click
@@ -258,28 +331,92 @@ Public Class FrmMedicineInv
 
     End Sub
 
-#Disable Warning IDE1006 ' Naming Styles
-    Private Sub deleteMedicine()
-#Enable Warning IDE1006 ' Naming Styles
-        Dim medicineId As String = txtMID.Text.Trim()
+    Private Sub DeleteMedicine()
+        Try
+            ' -------------------------------
+            ' VALIDATE ID
+            ' -------------------------------
+            Dim medicineId As Integer
+            If Not Integer.TryParse(txtMID.Text.Trim(), medicineId) Then
+                MessageBox.Show("Invalid Medicine ID.",
+                            "Validation",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning)
+                Exit Sub
+            End If
 
-        Dim medicineToDelete = (From m In db.tbl_medicine_inventories
-                                Where m.medicine_id = medicineId
-                                Select m).FirstOrDefault()
+            ' -------------------------------
+            ' FETCH MEDICINE
+            ' -------------------------------
+            Dim medicineToDelete = (From m In db.tbl_products
+                                    Where m.ProductID = medicineId
+                                    Select m).FirstOrDefault()
 
-        If medicineToDelete IsNot Nothing Then
-            db.tbl_medicine_inventories.DeleteOnSubmit(medicineToDelete)
+            If medicineToDelete Is Nothing Then
+                MessageBox.Show("Medicine not found.",
+                            "Warning",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning)
+                Exit Sub
+            End If
 
+            ' -------------------------------
+            ' CONFIRM DELETE (RECOMMENDED)
+            ' -------------------------------
+            If MessageBox.Show($"Are you sure you want to delete '{medicineToDelete.BrandName}'?",
+                           "Confirm Delete",
+                           MessageBoxButtons.YesNo,
+                           MessageBoxIcon.Warning) <> DialogResult.Yes Then
+                Exit Sub
+            End If
+
+            ' -------------------------------
+            ' CAPTURE OLD VALUES (AUDIT)
+            ' -------------------------------
+            Dim oldValue As String =
+            $"Code={medicineToDelete.ProductCode}, " &
+            $"Name={medicineToDelete.BrandName}, " &
+            $"Generic={medicineToDelete.GenericName}, " &
+            $"Qty={medicineToDelete.Quantity}, " &
+            $"Price={medicineToDelete.SellingPrice}"
+
+            ' -------------------------------
+            ' DELETE
+            ' -------------------------------
+            db.tbl_products.DeleteOnSubmit(medicineToDelete)
             db.SubmitChanges()
 
-            MessageBox.Show("Medicine deleted successfully.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("Medicine deleted successfully.",
+                        "Information",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+
             LoadMedicineInventory()
             setDefaultButtons()
 
-        Else
-            MessageBox.Show("Medicine ID not found.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End If
+            ' -------------------------------
+            ' AUDIT TRAIL (SUCCESS ONLY)
+            ' -------------------------------
+            Dim f As New Functions()
+            f.InsertAuditTrail(
+            "DELETE",
+            "Medicine",
+            medicineToDelete.ProductCode,
+            $"Deleted medicine: {medicineToDelete.BrandName}",
+            oldValue,
+            Nothing,
+            AdminHome.username.Trim(),
+            AdminHome.Guna2HtmlLabel1.Text
+        )
+
+        Catch ex As Exception
+            MessageBox.Show("An error occurred: " & ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
+        End Try
     End Sub
+
 
     Private Sub UpdateBtn_Click(sender As Object, e As EventArgs) Handles UpdateBtn.Click
         If confirmUpdate.Show = DialogResult.Yes Then
@@ -292,44 +429,125 @@ Public Class FrmMedicineInv
 
     Private Sub UpdateMedicine()
         Try
-            Dim ID As String = txtMID.Text.Trim()
-
-            If String.IsNullOrEmpty(ID) Then
-                MessageBox.Show("Please enter Medicine Code.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
+            ' -------------------------------
+            ' VALIDATE ID
+            ' -------------------------------
+            Dim ID As Integer
+            If Not Integer.TryParse(txtMID.Text.Trim(), ID) Then
+                MessageBox.Show("Invalid Medicine ID.",
+                            "Validation",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning)
+                Exit Sub
             End If
 
+            ' -------------------------------
+            ' FETCH MEDICINE
+            ' -------------------------------
             Dim medicine = (From m In db.tbl_products
                             Where m.ProductID = ID
                             Select m).FirstOrDefault()
 
-
-            If medicine IsNot Nothing Then
-                medicine.ProductCode = txtMCode.Text.Trim()
-                medicine.GenericName = txtMName.Text.Trim()
-                medicine.BrandName = txtBrand.Text.Trim()
-                medicine.DrugType = txtMType.Text
-                medicine.Unit = txtMUnit.Text
-                medicine.UnitValue = txtUnitValue.Text
-                medicine.CostPrice = Decimal.Parse(txtPrice.Text)
-                medicine.ProfitPercent = txtPercent.Text
-                medicine.SellingPrice = Decimal.Parse(txtSellingPrice.Text)
-                medicine.ExpiryDate = txtExprDate.Value.Date
-                medicine.Quantity = Integer.Parse(txtQuantity.Text)
-
-                db.SubmitChanges()
-                MessageBox.Show("Medicine updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                LoadMedicineInventory()
-            Else
-                MessageBox.Show("Medicine code not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If medicine Is Nothing Then
+                MessageBox.Show("Medicine not found.",
+                            "Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error)
+                Exit Sub
             End If
 
-        Catch ex As FormatException
-            MessageBox.Show("Please enter valid numeric values for Quantity, Reorder Level, and Price.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' -------------------------------
+            ' CAPTURE OLD VALUES (AUDIT)
+            ' -------------------------------
+            Dim oldValue As String =
+            $"Code={medicine.ProductCode}, " &
+            $"Name={medicine.BrandName}, " &
+            $"Generic={medicine.GenericName}, " &
+            $"Cost={medicine.CostPrice}, " &
+            $"Price={medicine.SellingPrice}, " &
+            $"Qty={medicine.Quantity}"
+
+            ' -------------------------------
+            ' SAFE PARSING
+            ' -------------------------------
+            Dim costPrice As Decimal
+            Dim sellingPrice As Decimal
+            Dim profitPercent As Decimal
+            Dim quantity As Integer
+            Dim lowStockQty As Integer
+
+            If Not Decimal.TryParse(txtPrice.Text, costPrice) OrElse
+           Not Decimal.TryParse(txtSellingPrice.Text, sellingPrice) OrElse
+           Not Decimal.TryParse(txtProfit.Text, profitPercent) OrElse
+           Not Integer.TryParse(txtQuantity.Text, quantity) OrElse
+           Not Integer.TryParse(txtLowStockQty.Text, lowStockQty) Then
+
+                MessageBox.Show("Please enter valid numeric values.",
+                            "Validation",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            ' -------------------------------
+            ' UPDATE FIELDS
+            ' -------------------------------
+            medicine.ProductCode = txtMCode.Text.Trim()
+            medicine.GenericName = txtMName.Text.Trim()
+            medicine.BrandName = txtBrand.Text.Trim()
+            medicine.DrugType = txtMType.Text.Trim()
+            medicine.Unit = txtMUnit.Text.Trim()
+            medicine.UnitValue = txtUnitValue.Text.Trim()
+            medicine.CostPrice = costPrice
+            medicine.ProfitPercent = profitPercent
+            medicine.SellingPrice = sellingPrice
+            medicine.ExpiryDate = txtExprDate.Value.Date
+            medicine.Quantity = quantity
+            medicine.LowStockQty = lowStockQty
+
+            ' -------------------------------
+            ' SAVE CHANGES
+            ' -------------------------------
+            db.SubmitChanges()
+
+            MessageBox.Show("Medicine updated successfully.",
+                        "Success",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+
+            LoadMedicineInventory()
+
+            ' -------------------------------
+            ' AUDIT TRAIL (SUCCESS ONLY)
+            ' -------------------------------
+            Dim newValue As String =
+            $"Code={medicine.ProductCode}, " &
+            $"Name={medicine.BrandName}, " &
+            $"Generic={medicine.GenericName}, " &
+            $"Cost={medicine.CostPrice}, " &
+            $"Price={medicine.SellingPrice}, " &
+            $"Qty={medicine.Quantity}"
+
+            Dim f As New Functions()
+            f.InsertAuditTrail(
+            "UPDATE",
+            "Medicine",
+            medicine.ProductCode,
+            $"Updated medicine: {medicine.BrandName}",
+            oldValue,
+            newValue,
+            AdminHome.username.Trim(),
+            AdminHome.Guna2HtmlLabel1.Text
+        )
+
         Catch ex As Exception
-            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("An error occurred: " & ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
         End Try
     End Sub
+
 
     Private Sub SearchBtn_Click(sender As Object, e As EventArgs) Handles searchBtn.Click
         searchMedicine()
@@ -366,7 +584,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -397,7 +616,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -425,7 +645,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -454,7 +675,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -483,7 +705,8 @@ Public Class FrmMedicineInv
                             .Selling_Price = t1.SellingPrice,
                             .Expiry_Date = t1.ExpiryDate,
                             t1.Quantity,
-                            .dateAdded = t1.dateAdded
+                            .dateAdded = t1.dateAdded,
+                            .LowStockQty = t1.LowStockQty
             }).ToList
 
 
@@ -509,37 +732,34 @@ Public Class FrmMedicineInv
     End Sub
 
 #Disable Warning IDE1006 ' Naming Styles
-    Private Sub txtPercent_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPercent.KeyPress
+    Private Sub txtPercent_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProfit.KeyPress
 #Enable Warning IDE1006 ' Naming Styles
-        ' Allow control keys (backspace, delete, etc.)
         If Char.IsControl(e.KeyChar) Then
             Return
         End If
 
-        ' Allow digits
         If Char.IsDigit(e.KeyChar) Then
             Return
         End If
 
-        ' Allow only one decimal point
-        If e.KeyChar = "."c AndAlso Not txtPercent.Text.Contains(".") Then
+        If e.KeyChar = "."c AndAlso Not txtProfit.Text.Contains(".") Then
             Return
         End If
 
-        ' If none of the above, block input
         e.Handled = True
     End Sub
 
 #Disable Warning IDE1006 ' Naming Styles
-    Private Sub txtPercent_Leave(sender As Object, e As EventArgs) Handles txtPercent.Leave, txtPrice.Leave
+    Private Sub txtPercent_Leave(sender As Object, e As EventArgs) Handles txtProfit.Leave, txtPrice.Leave
 #Enable Warning IDE1006 ' Naming Styles
         Dim costPrice As Decimal
-        Dim percent As Decimal
+        Dim profit As Decimal
 
-        If Decimal.TryParse(txtPrice.Text, costPrice) AndAlso Decimal.TryParse(txtPercent.Text, percent) Then
-            txtSellingPrice.Text = (costPrice + (costPrice * percent / 100)).ToString("0.00")
+        If Decimal.TryParse(txtPrice.Text, costPrice) AndAlso Decimal.TryParse(txtProfit.Text, profit) Then
+            txtSellingPrice.Text = (costPrice + profit).ToString("0.00")
         Else
             txtSellingPrice.Text = "0.00"
         End If
     End Sub
+
 End Class

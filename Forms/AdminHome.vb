@@ -1,5 +1,5 @@
 ﻿Public Class AdminHome
-
+    Public username As String
     Private Sub AdminHome_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Bounds = Screen.PrimaryScreen.WorkingArea
 
@@ -17,7 +17,7 @@
         Guna2NotificationPaint1.TargetControl = LowStockBtn
         Guna2NotificationPaint1.Location = New Point(LowStockBtn.Width - 15, 5)
         Guna2NotificationPaint1.Text = "5" ' Example count
-
+        NotificationBroadCast()
 
     End Sub
 
@@ -42,18 +42,19 @@
         ElseIf role = "ADMIN" Then
 
             'ADMIN ACCESS ALL
-            dashboardBtn.Parent = Guna2TabControl1
             salesTransactionBtn.Parent = Guna2TabControl1
             medicineInventoryBtn.Parent = Guna2TabControl1
             logsBtn.Parent = Guna2TabControl1
             UserAccountsBtn.Parent = Guna2TabControl1
             SettingsBtn.Parent = Guna2TabControl1
             salesHistoryButton.Parent = Guna2TabControl1
+            LowStockBtn.Parent = Guna2TabControl1
 
 
             customerRecordsBtn.Parent = Nothing
-            expiryMonitorButton.Parent = Guna2TabControl1
-            LowStockBtn.Parent = Guna2TabControl1
+            expiryMonitorButton.Parent = Nothing
+            dashboardBtn.Parent = Guna2TabControl1
+
         End If
     End Sub
 
@@ -145,7 +146,7 @@
 #Disable Warning IDE1006 ' Naming Styles
     Private Sub logoutBtn_MouseHover(sender As Object, e As EventArgs) Handles logoutBtn.MouseHover
 #Enable Warning IDE1006 ' Naming Styles
-        logoutBtn.BackColor = Color.FromArgb(27, 143, 50)
+        logoutBtn.BackColor = Color.FromArgb(243, 130, 132)
 
     End Sub
 
@@ -157,11 +158,25 @@
     End Sub
 
     Private Sub LogoutBtn_Click(sender As Object, e As EventArgs) Handles logoutBtn.Click
+        Dim f As New Functions()
         If ConfirmLogout.Show = DialogResult.Yes Then
 
             ActivityLog("Logged Out")
-            LogoutMsg.Show()
             Login.Show()
+
+
+            f.InsertAuditTrail(
+                "LOGOUT",
+                "Authentication",
+                Nothing,                              ' RecordID
+                "User logged Out successfully",        ' Description
+                Nothing,                              ' OldValue
+                Nothing,                              ' NewValue
+                username.Trim(),              ' CurrentUserName
+                Guna2HtmlLabel1.Text        ' CurrentUserRole
+            )
+
+
             Me.Close()
 
         Else
@@ -175,28 +190,26 @@
 
     Private Sub NotificationBroadCast()
         Try
-            ' Get the OLDEST unseen notification
             Dim notif = (From n In db.tbl_Notifications
-                         Where n.Seen = False
+                         Where n.Seen = False AndAlso n.user_id <> txtUserID.Text
                          Order By n.ID Ascending
                          Select n).FirstOrDefault()
 
             If notif IsNot Nothing Then
-                ' Show balloon notification
                 NotifyIcon1.BalloonTipTitle = "System Notification"
                 NotifyIcon1.BalloonTipText = notif.Message
                 NotifyIcon1.BalloonTipIcon = ToolTipIcon.Info
                 NotifyIcon1.ShowBalloonTip(5000)
 
-                ' Mark as seen
                 notif.Seen = True
                 db.SubmitChanges()
             End If
 
         Catch ex As Exception
-            MessageBox.Show("Failed to check notifications: " & ex.Message,
-                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Failed to check notifications: " & ex.Message)
         End Try
     End Sub
+
+
 #End Region
 End Class

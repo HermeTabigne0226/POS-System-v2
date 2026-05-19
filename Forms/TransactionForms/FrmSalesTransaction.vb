@@ -24,27 +24,32 @@
             .AllowUserToDeleteRows = False
 
             .Columns(0).Width = 80
+            .Columns(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells
             ' === Price ===
             .Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(2).DefaultCellStyle.Format = "N2"
 
-            ' === Quantity ===
+            ' === Avail. Quantity ===
             .Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(3).DefaultCellStyle.Format = "N0"
 
-            ' === Extend Price ===
+            ' === Quantity ===
             .Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
-            .Columns(4).DefaultCellStyle.Format = "N2"
+            .Columns(4).DefaultCellStyle.Format = "N0"
 
-            ' === Discount Amount (RED TEXT) ===
+            ' === Extend Price ===
             .Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(5).DefaultCellStyle.Format = "N2"
-            .Columns(5).DefaultCellStyle.ForeColor = Color.Red
 
-            ' === Total Price (BOLD TEXT) ===
+            ' === Discount Amount (RED TEXT) ===
             .Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
             .Columns(6).DefaultCellStyle.Format = "N2"
-            .Columns(6).DefaultCellStyle.Font = New Font(.Font, FontStyle.Bold)
+            .Columns(6).DefaultCellStyle.ForeColor = Color.Red
+
+            ' === Total Price (BOLD TEXT) ===
+            .Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight
+            .Columns(7).DefaultCellStyle.Format = "N2"
+            .Columns(7).DefaultCellStyle.Font = New Font(.Font, FontStyle.Bold)
 
             .AlternatingRowsDefaultCellStyle.BackColor = Color.AliceBlue
             .AlternatingRowsDefaultCellStyle.ForeColor = Color.Black
@@ -54,8 +59,8 @@
                 col.ReadOnly = True
             Next
 
-            .Columns(3).ReadOnly = False
-            .Columns(5).ReadOnly = False
+            .Columns(4).ReadOnly = False
+            .Columns(6).ReadOnly = False
 
 
         End With
@@ -73,7 +78,7 @@
             RemoveHandler tb.KeyPress, AddressOf NumericTextBox_KeyPress
 
             ' Apply only on specific columns (Quantity = index 3, Discount = index 5)
-            If Guna2DataGridView1.CurrentCell.ColumnIndex = 3 OrElse Guna2DataGridView1.CurrentCell.ColumnIndex = 5 Then
+            If Guna2DataGridView1.CurrentCell.ColumnIndex = 4 OrElse Guna2DataGridView1.CurrentCell.ColumnIndex = 6 Then
                 AddHandler tb.KeyPress, AddressOf NumericTextBox_KeyPress
             End If
         End If
@@ -92,40 +97,85 @@
         End If
     End Sub
 
-    Private Sub Guna2DataGridView1_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles Guna2DataGridView1.CellEndEdit
+    Private Sub Guna2DataGridView1_CellEndEdit(
+    sender As Object,
+    e As DataGridViewCellEventArgs
+) Handles Guna2DataGridView1.CellEndEdit
+
         Try
+            ' Ensure valid row & column
+            If e.RowIndex < 0 OrElse e.ColumnIndex < 0 Then Exit Sub
+
             Dim row As DataGridViewRow = Guna2DataGridView1.Rows(e.RowIndex)
 
-            ' Safely convert values (default if empty)
-            Dim price As Decimal = If(IsNumeric(row.Cells(2).Value), CDec(row.Cells(2).Value), 0D)
-            Dim qty As Decimal = If(IsNumeric(row.Cells(3).Value), CDec(row.Cells(3).Value), 1D)
-            Dim discount As Decimal = If(IsNumeric(row.Cells(5).Value), CDec(row.Cells(5).Value), 0D)
+            ' 🔢 Only validate QUANTITY column (Cell 4)
+            If e.ColumnIndex = 4 Then
 
-            ' Force minimum qty = 1
-            If qty <= 0 Then qty = 1D
+                Dim enteredQty As Decimal = 0D
+                Dim availableQty As Decimal = 0D
 
-            ' Calculate
-            Dim extendPrice As Decimal = price * qty
-            Dim totalPrice As Decimal = extendPrice - discount
-            If totalPrice < 0 Then totalPrice = 0D
+                ' Read values safely
+                Decimal.TryParse(row.Cells(4).Value?.ToString(), enteredQty)
+                Decimal.TryParse(row.Cells(3).Value?.ToString(), availableQty)
 
-            ' Update grid (formatted N2)
-            row.Cells(3).Value = qty.ToString("N0")
-            row.Cells(4).Value = extendPrice.ToString("N2")
-            row.Cells(5).Value = discount.ToString("N2")
-            row.Cells(6).Value = totalPrice.ToString("N2")
+                ' ❌ Invalid or zero qty → reset to 1
+                If enteredQty <= 0 Then
+                    row.Cells(4).Value = 1D
+
+                    ' ❌ Exceeds available stock → reset to 1
+                ElseIf enteredQty > availableQty Then
+                    With ErrorQty
+                        .Caption = "Stock Limit"
+                        .Text = "Quantity exceeds available stock." & vbCrLf &
+                                "Quantity has been reset to 1."
+                        .Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK
+                        .Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning
+                        .Show()
+                    End With
 
 
+                    row.Cells(4).Value = 1D
+                End If
+
+                ' 🔥 Recalculate after validation
+                RecalculateRow(row)
+            End If
 
         Catch
-
+            ' (Optional) log error
         Finally
             CalculateTotals()
             Guna2DataGridView1.ClearSelection()
         End Try
 
-        Guna2DataGridView1.ClearSelection()
     End Sub
+
+
+
+    Private Sub RecalculateRow(row As DataGridViewRow)
+
+        ' Safely convert values
+        Dim price As Decimal = If(IsNumeric(row.Cells(3).Value), CDec(row.Cells(2).Value), 0D)
+        Dim qty As Decimal = If(IsNumeric(row.Cells(4).Value), CDec(row.Cells(4).Value), 1D)
+        Dim discount As Decimal = If(IsNumeric(row.Cells(6).Value), CDec(row.Cells(6).Value), 0D)
+
+        ' Force minimum qty = 1
+        If qty <= 0 Then qty = 1D
+
+        ' Calculate
+        Dim extendPrice As Decimal = price * qty
+        Dim totalPrice As Decimal = extendPrice - discount
+        If totalPrice < 0 Then totalPrice = 0D
+
+        ' Update grid
+        row.Cells(4).Value = qty.ToString("N0")
+        row.Cells(5).Value = extendPrice.ToString("N2")
+        row.Cells(6).Value = discount.ToString("N2")
+        row.Cells(7).Value = totalPrice.ToString("N2")
+
+    End Sub
+
+
 
     Private Sub LoadLatestTransactionID()
         ' Get the latest TransactionID from POSTransaction table
@@ -163,26 +213,25 @@
 
     Private Sub LoadProductCodes()
 
-        ' Assuming db is your DataContext or DataSet
         Dim productCodes = (From t1 In db.tbl_products
+                            Order By t1.ProductCode
                             Select t1.ProductCode).ToList()
 
+        productCodes.Insert(0, "") ' optional empty
 
-        Dim auto As New AutoCompleteStringCollection()
-        For Each code In productCodes
-            auto.Add(code)
-        Next
+        With txtProductCode
+            .DropDownStyle = ComboBoxStyle.DropDownList   ' 🔒 cannot type
+            .DataSource = productCodes
 
-        txtProductCode.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-        txtProductCode.AutoCompleteSource = AutoCompleteSource.CustomSource
-        txtProductCode.AutoCompleteCustomSource = auto
-
-        productCodes.Insert(0, "")
-
-        txtProductCode.DataSource = productCodes
-
+            ' ❗ REQUIRED for DropDownList
+            .AutoCompleteMode = AutoCompleteMode.None
+            .AutoCompleteSource = AutoCompleteSource.ListItems
+        End With
 
     End Sub
+
+
+
 
     Private Sub TxtproductCode_Enter(sender As Object, e As EventArgs)
         If txtProductCode.Text = "" Then
@@ -196,9 +245,8 @@
     End Sub
 
 
-#Disable Warning IDE1006 ' Naming Styles
     Private Sub loadItemDescription()
-#Enable Warning IDE1006 ' Naming Styles
+
         Dim prodCode As String = txtProductCode.Text
 
         Dim product = (From t1 In db.tbl_products
@@ -232,10 +280,15 @@
 
 
     Private Sub Guna2PictureBox6_Click(sender As Object, e As EventArgs) Handles Guna2PictureBox6.Click
+        If txtAvailableQty.Text < 1 Then
+            CheckLowStock()
+        Else
 
-        insertProduct()
-        CalculateTotals()
-        Guna2DataGridView1.ClearSelection()
+            insertProduct()
+            CalculateTotals()
+            Guna2DataGridView1.ClearSelection()
+        End If
+
     End Sub
 
     Private Sub CalculateTotals()
@@ -247,10 +300,10 @@
         For Each row As DataGridViewRow In Guna2DataGridView1.Rows
             If Not row.IsNewRow Then
                 ' Count total items (sum of quantity)
-                totalItems += Convert.ToInt32(row.Cells(3).Value)
+                totalItems += Convert.ToInt32(row.Cells(4).Value)
 
                 ' Sum up Total Price column (already VAT-inclusive)
-                totalAmount += Convert.ToDecimal(row.Cells(6).Value)
+                totalAmount += Convert.ToDecimal(row.Cells(7).Value)
             End If
         Next
 
@@ -274,9 +327,7 @@
 
 
 
-#Disable Warning IDE1006 ' Naming Styles
     Private Sub insertProduct()
-#Enable Warning IDE1006 ' Naming Styles
 
         If txtProductCode.Text = "" Or txtItemDesc.Text = "" Then
             Exit Sub
@@ -288,23 +339,23 @@
                     warningDuplicate.Show()
 
                     row.Selected = True
-                    Guna2DataGridView1.CurrentCell = row.Cells(3)
+                    Guna2DataGridView1.CurrentCell = row.Cells(4)
                     Guna2DataGridView1.BeginEdit(True)
                     Exit Sub
                 End If
             Next
 
             ' If not duplicate, insert new product
-            Dim price = (From t1 In db.tbl_products
-                         Where t1.ProductCode = txtProductCode.Text
-                         Select t1.SellingPrice).FirstOrDefault
+            Dim product = (From t1 In db.tbl_products
+                           Where t1.ProductCode = txtProductCode.Text
+                           Select t1.SellingPrice, t1.Quantity).FirstOrDefault
 
-            Dim quantity As Decimal = 1
-            Dim Extend_Price As Decimal = price * quantity
+            Dim qty As Decimal = 1
+            Dim Extend_Price As Decimal = product.SellingPrice * qty
             Dim discount As Decimal = 0.00
             Dim Total As Decimal = Extend_Price + discount
 
-            Guna2DataGridView1.Rows.Add(txtProductCode.Text, txtItemDesc.Text, price, quantity, Extend_Price, discount, Total)
+            Guna2DataGridView1.Rows.Add(txtProductCode.Text, txtItemDesc.Text, product.SellingPrice, product.Quantity, qty, Extend_Price, discount, Total)
             Guna2DataGridView1.ClearSelection()
         End If
 
@@ -332,16 +383,18 @@
             End If
 
         ElseIf e.KeyCode = Keys.F6 Then
-            ' Focus on Quantity cell (index 3) of the current row
-            If Guna2DataGridView1.CurrentRow IsNot Nothing AndAlso Not Guna2DataGridView1.CurrentRow.IsNewRow Then
-                Guna2DataGridView1.CurrentCell = Guna2DataGridView1.CurrentRow.Cells(3) ' Qty column
-                Guna2DataGridView1.BeginEdit(True)
-            End If
+            AddProductQty()
 
+        ElseIf e.KeyCode = Keys.F7 Then
 
+            Dim frm As New SearchForm
+            frm.SalesForm = Me   ' 🔥 PASS CURRENT INSTANCE
+            frm.ShowDialog()
 
 
         End If
+
+
     End Sub
 
 
@@ -360,12 +413,12 @@
 
             If Guna2DataGridView1.Rows.Count > 0 AndAlso Not (Guna2DataGridView1.Rows.Count = 1 AndAlso Guna2DataGridView1.Rows(0).IsNewRow) Then
 
-                    e.SuppressKeyPress = True
-                    LoadValuePOSPayments()
-                    POSPayment.ShowDialog()
-                Else
-                    noProductMsg.Show()
-                End If
+                e.SuppressKeyPress = True
+                LoadValuePOSPayments()
+                POSPayment.ShowDialog()
+            Else
+                noProductMsg.Show()
+            End If
 
         ElseIf e.KeyCode = Keys.F1 Then
             If newTransaction.Show() = DialogResult.OK Then
@@ -376,9 +429,26 @@
             Else
                 Exit Sub
             End If
+        ElseIf e.KeyCode = Keys.F7 Then
+            Dim frm As New SearchForm
+            frm.SalesForm = Me   ' 🔥 PASS CURRENT INSTANCE
+            frm.ShowDialog()
 
-        ElseIf e.KeyCode = Keys.F12 Then
-            InsertPOSDetails(txtInvoiceNo.Text, Guna2DataGridView1)
+        ElseIf e.KeyCode = Keys.F8 Then
+
+            Dim result As DialogResult = MessageBox.Show(
+                "Do you want to exit the application?",
+                "Exit",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            )
+
+            If result = DialogResult.Yes Then
+                Application.Exit()
+            End If
+
+
+
         End If
 
     End Sub
@@ -429,7 +499,8 @@
             .Message = "Low Stock Alert: " & txtItemDesc.Text &
                        " → Remaining Qty: " & qty,
             .CreatedAt = DateTime.Now,
-            .Seen = False
+            .Seen = False,
+            .user_id = Convert.ToInt32(AdminHome.txtUserID.Text)
         }
 
             db.tbl_Notifications.InsertOnSubmit(notif)
@@ -445,36 +516,92 @@
             db.SubmitChanges()
         End If
     End Sub
+    'Public Sub ResetTransaction()
 
+    '    ' Clear cart
+    '    Guna2DataGridView1.Rows.Clear()
 
+    '    ' Reset product entry
+    '    txtProductCode.SelectedIndex = 0
+    '    txtItemDesc.Clear()
+    '    txtAvailableQty.Clear()
 
+    '    ' Reset totals
+    '    txtTotalItems.Text = "0"
+    '    txtVatSales.Text = "0.00"
+    '    txtVatExemptSales.Text = "0.00"
+    '    txtTotalSales.Text = "0.00"
+    '    txtVatAmount.Text = "0.00"
+    '    txtTotalAmount.Text = "0.00"
 
+    '    ' Reset invoice number
+    '    LoadLatestTransactionID()
 
+    '    ' Focus back to product code
+    '    txtProductCode.Focus()
 
-    Public Sub InsertPOSDetails(transactionId As Integer, dgv As DataGridView)
-        For Each row As DataGridViewRow In dgv.Rows
-            If Not row.IsNewRow Then
+    'End Sub
+
+    Public Function InsertPOSDetails(dgv As DataGridView, transactionID As Integer) As Boolean
+
+        If transactionID <= 0 Then
+            MessageBox.Show("Invalid TransactionID", "DEBUG")
+            Return False
+        End If
+
+        If dgv.Rows.Count = 0 Then
+            MessageBox.Show("No rows in grid", "DEBUG")
+            Return False
+        End If
+
+        Try
+            For Each row As DataGridViewRow In dgv.Rows
+
+                If row.IsNewRow Then Continue For
+
+                ' 🔍 DEBUG VALUES
+                Debug.WriteLine("INSERTING:")
+                Debug.WriteLine("TransactionID: " & transactionID)
+                Debug.WriteLine("ProductCode: " & row.Cells(0).Value)
+                Debug.WriteLine("ProductName: " & row.Cells(1).Value)
+                Debug.WriteLine("Price: " & row.Cells(2).Value)
+                Debug.WriteLine("Qty: " & row.Cells(4).Value)
+                Debug.WriteLine("Extend: " & row.Cells(5).Value)
+                Debug.WriteLine("Discount: " & row.Cells(6).Value)
+                Debug.WriteLine("Total: " & row.Cells(7).Value)
+
                 db.SP_InsertPOSTransactionDetails(
-                transactionId,                                     ' FK TransactionID
-                row.Cells(0).Value.ToString(),                     ' ProductID
-                row.Cells(1).Value.ToString(),                     ' ProductName
-                Convert.ToDecimal(row.Cells(2).Value),             ' Price
-                Convert.ToInt32(row.Cells(3).Value),               ' Quantity
-                Convert.ToDecimal(row.Cells(4).Value),             ' ExtendPrice
-                Convert.ToDecimal(row.Cells(5).Value),             ' Discount
-                Convert.ToDecimal(row.Cells(6).Value)              ' Total
+                transactionID,
+                CStr(row.Cells(0).Value),
+                CStr(row.Cells(1).Value),
+                CDec(row.Cells(2).Value),
+                CInt(row.Cells(4).Value),
+                CDec(row.Cells(5).Value),
+                CDec(row.Cells(6).Value),
+                CDec(row.Cells(7).Value)
             )
-            End If
-        Next
-        db.SubmitChanges()
-    End Sub
+            Next
+
+            Return True
+
+        Catch ex As Exception
+            MessageBox.Show("DETAIL INSERT FAILED:" & vbCrLf & ex.Message,
+                        "SQL ERROR",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)
+            Return False
+        End Try
+
+    End Function
+
+
 
     Public Sub UpdateProductQuantities(dgv As DataGridView)
         Try
             For Each row As DataGridViewRow In dgv.Rows
                 If Not row.IsNewRow Then
                     Dim productCode As String = row.Cells(0).Value.ToString()
-                    Dim soldQty As Integer = Convert.ToInt32(row.Cells(3).Value)
+                    Dim soldQty As Integer = Convert.ToInt32(row.Cells(4).Value)
 
                     Dim product = (From p In db.tbl_products
                                    Where p.ProductCode = productCode
@@ -508,7 +635,7 @@
            Not (Guna2DataGridView1.Rows.Count = 1 AndAlso Guna2DataGridView1.Rows(0).IsNewRow) Then
 
             LoadValuePOSPayments()
-            POSPayment.ShowDialog()
+            POSPayment.Show()
         Else
             noProductMsg.Show()
         End If
@@ -527,6 +654,109 @@
         POSPayment.InvoiceID.Text = txtInvoiceNo.Text
 
     End Sub
+
+
+    Private Sub Guna2Panel10_Click(sender As Object, e As EventArgs) Handles Guna2Panel10.Click
+
+        Dim frm As New SearchForm
+        frm.SalesForm = Me   ' 🔥 PASS CURRENT INSTANCE
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub Guna2Panel6_Click(sender As Object, e As EventArgs) Handles Guna2Panel6.Click
+        ResetTransaction1()
+    End Sub
+
+    Public Sub ResetTransaction1()
+        If newTransaction.Show() = DialogResult.OK Then
+            Me.Close()
+            AdminHome.OpenChildForm(New FrmSalesTransaction(), AdminHome.panelParent, "Sales Transaction", "shoppingCart")
+        Else
+            Exit Sub
+        End If
+    End Sub
+
+
+
+    Private Sub Guna2Panel7_Click(sender As Object, e As EventArgs) Handles Guna2Panel7.Click
+        ' Remove selected row
+        If Guna2DataGridView1.SelectedRows.Count > 0 AndAlso Not Guna2DataGridView1.SelectedRows(0).IsNewRow Then
+            If confirmRemove.Show = DialogResult.OK Then
+                Guna2DataGridView1.Rows.Remove(Guna2DataGridView1.SelectedRows(0))
+                CalculateTotals()
+            End If
+        Else
+            noProductMsg.Show()
+
+        End If
+    End Sub
+
+    Private Sub Guna2Panel9_Click(sender As Object, e As EventArgs) Handles Guna2Panel9.Click
+        AddProductQty()
+    End Sub
+
+    Private Sub AddProductQty()
+
+        ' 1️⃣ Ensure a valid row is selected
+        If Guna2DataGridView1.CurrentRow Is Nothing _
+        OrElse Guna2DataGridView1.CurrentRow.IsNewRow Then Exit Sub
+
+        Dim row As DataGridViewRow = Guna2DataGridView1.CurrentRow
+
+        ' 2️⃣ Open Quantity form
+        Dim frm As New Quantity()
+
+        ' Pass current quantity
+        frm.InitialQuantity = If(IsNumeric(row.Cells(4).Value),
+                             CDec(row.Cells(4).Value), 1D)
+
+        ' 3️⃣ Get quantity from dialog
+        If frm.ShowDialog() = DialogResult.OK Then
+
+            Dim enteredQty As Decimal = frm.SelectedQuantity
+            Dim availableQty As Decimal = 0D
+
+            ' Get Available Qty from Cell(3)
+            Decimal.TryParse(row.Cells(3).Value.ToString(), availableQty)
+
+            ' 4️⃣ Validate against available stock
+            If enteredQty > availableQty Then
+                With ErrorQty
+                    .Caption = "Stock Limit"
+                    .Text = "Quantity exceeds available stock." & vbCrLf &
+                                "Quantity has been reset to 1."
+                    .Buttons = Guna.UI2.WinForms.MessageDialogButtons.OK
+                    .Icon = Guna.UI2.WinForms.MessageDialogIcon.Warning
+                    .Show()
+                End With
+
+                row.Cells(4).Value = 1D
+            Else
+                row.Cells(4).Value = enteredQty
+            End If
+
+            ' 5️⃣ Recalculate row values
+            RecalculateRow(row)
+
+            ' 6️⃣ Update totals
+            CalculateTotals()
+        End If
+
+    End Sub
+
+    Private Sub Guna2Panel11_Click(sender As Object, e As EventArgs) Handles Guna2Panel11.Click
+        Dim result As DialogResult = MessageBox.Show(
+       "Do you want to exit the application?",
+       "Exit",
+       MessageBoxButtons.YesNo,
+       MessageBoxIcon.Question
+   )
+
+        If result = DialogResult.Yes Then
+            Application.Exit()
+        End If
+    End Sub
+
 
 
 

@@ -37,9 +37,25 @@ Public Class Login
         Dim f As New Functions()
         Dim isLoggedIn = f.Login(txtUsername.Text.Trim(), txtPassword.Text)
 
+
+
         If isLoggedIn Then
             LoginSuccess.Show()
             AdminHome.Show()
+            AdminHome.username = txtUsername.Text
+
+            f.InsertAuditTrail(
+                "LOGIN",
+                "Authentication",
+                Nothing,                              ' RecordID
+                "User logged in successfully",        ' Description
+                Nothing,                              ' OldValue
+                Nothing,                              ' NewValue
+                txtUsername.Text.Trim(),              ' CurrentUserName
+                AdminHome.Guna2HtmlLabel1.Text        ' CurrentUserRole
+            )
+
+
             Me.Close()
         Else
             InvalidAccount.Show()
@@ -70,7 +86,7 @@ Public Class Login
             targetLocation = New Point(829, 414)
             PictureBox1.Image = My.Resources.left_arrow
         Else
-            targetLocation = New Point(768, 414)
+            targetLocation = New Point(781, 414)
             PictureBox1.Image = My.Resources.right_arrow
         End If
 
@@ -94,9 +110,13 @@ Public Class Login
         End If
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-        Application.Exit()
 
+
+
+    Private Sub LinkLabel1_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+
+        If ConfirmExit.Show = DialogResult.Yes Then
+            Application.Exit()
+        End If
     End Sub
-
 End Class

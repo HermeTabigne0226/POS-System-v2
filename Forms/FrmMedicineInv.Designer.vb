@@ -32,32 +32,27 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel1 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtMID = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2Panel6 = New Guna.UI2.WinForms.Guna2Panel()
-        Me.reloadBtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.CancelBtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.DeleteBtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.ClearBtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.UpdateBtn = New Guna.UI2.WinForms.Guna2Button()
-        Me.saveBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.Guna2HtmlLabel13 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtExprDate = New Guna.UI2.WinForms.Guna2DateTimePicker()
+        Me.txtLowStockQty = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.txtQuantity = New Guna.UI2.WinForms.Guna2NumericUpDown()
         Me.txtMUnit = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.txtMType = New Guna.UI2.WinForms.Guna2ComboBox()
         Me.txtUnitValue = New Guna.UI2.WinForms.Guna2TextBox()
         Me.TxtSupplier = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.txtPercent = New Guna.UI2.WinForms.Guna2TextBox()
+        Me.txtProfit = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtSellingPrice = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtPrice = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtBrand = New Guna.UI2.WinForms.Guna2TextBox()
         Me.txtMName = New Guna.UI2.WinForms.Guna2TextBox()
-        Me.Guna2HtmlLabel8 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.txtMCode = New Guna.UI2.WinForms.Guna2TextBox()
         Me.Guna2HtmlLabel14 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel11 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel16 = New Guna.UI2.WinForms.Guna2HtmlLabel()
-        Me.Guna2HtmlLabel13 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel15 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel10 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel12 = New Guna.UI2.WinForms.Guna2HtmlLabel()
+        Me.Guna2HtmlLabel8 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel9 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel7 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2HtmlLabel6 = New Guna.UI2.WinForms.Guna2HtmlLabel()
@@ -66,6 +61,14 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel3 = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.usernameTxt = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2PictureBox1 = New Guna.UI2.WinForms.Guna2PictureBox()
+        Me.SCR_Panel = New Guna.UI2.WinForms.Guna2Panel()
+        Me.saveBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.ClearBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.reloadBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.UDC_Panel = New Guna.UI2.WinForms.Guna2Panel()
+        Me.DeleteBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.UpdateBtn = New Guna.UI2.WinForms.Guna2Button()
+        Me.CancelBtn = New Guna.UI2.WinForms.Guna2Button()
         Me.Guna2Panel4 = New Guna.UI2.WinForms.Guna2Panel()
         Me.FullnameTxt = New Guna.UI2.WinForms.Guna2HtmlLabel()
         Me.Guna2Panel3 = New Guna.UI2.WinForms.Guna2Panel()
@@ -78,8 +81,11 @@ Partial Class FrmMedicineInv
         Me.confirmUpdate = New Guna.UI2.WinForms.Guna2MessageDialog()
         Me.Guna2Panel5.SuspendLayout()
         Me.Guna2Panel6.SuspendLayout()
+        CType(Me.txtLowStockQty, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtQuantity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SCR_Panel.SuspendLayout()
+        Me.UDC_Panel.SuspendLayout()
         Me.Guna2Panel4.SuspendLayout()
         Me.Guna2Panel3.SuspendLayout()
         CType(Me.DGV_MedicineList, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,7 +102,7 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel5.Controls.Add(Me.Guna2HtmlLabel1)
         Me.Guna2Panel5.Controls.Add(Me.txtMID)
         Me.Guna2Panel5.Controls.Add(Me.Guna2Panel6)
-        Me.Guna2Panel5.Location = New System.Drawing.Point(20, 3)
+        Me.Guna2Panel5.Location = New System.Drawing.Point(15, 3)
         Me.Guna2Panel5.Name = "Guna2Panel5"
         Me.Guna2Panel5.Size = New System.Drawing.Size(345, 927)
         Me.Guna2Panel5.TabIndex = 14
@@ -144,6 +150,7 @@ Partial Class FrmMedicineInv
         Me.txtMID.SelectedText = ""
         Me.txtMID.Size = New System.Drawing.Size(52, 32)
         Me.txtMID.TabIndex = 12
+        Me.txtMID.Visible = False
         '
         'Guna2Panel6
         '
@@ -151,32 +158,27 @@ Partial Class FrmMedicineInv
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2Panel6.BorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.Guna2Panel6.Controls.Add(Me.reloadBtn)
-        Me.Guna2Panel6.Controls.Add(Me.CancelBtn)
-        Me.Guna2Panel6.Controls.Add(Me.DeleteBtn)
-        Me.Guna2Panel6.Controls.Add(Me.ClearBtn)
-        Me.Guna2Panel6.Controls.Add(Me.UpdateBtn)
-        Me.Guna2Panel6.Controls.Add(Me.saveBtn)
+        Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel13)
         Me.Guna2Panel6.Controls.Add(Me.txtExprDate)
+        Me.Guna2Panel6.Controls.Add(Me.txtLowStockQty)
         Me.Guna2Panel6.Controls.Add(Me.txtQuantity)
         Me.Guna2Panel6.Controls.Add(Me.txtMUnit)
         Me.Guna2Panel6.Controls.Add(Me.txtMType)
         Me.Guna2Panel6.Controls.Add(Me.txtUnitValue)
         Me.Guna2Panel6.Controls.Add(Me.TxtSupplier)
-        Me.Guna2Panel6.Controls.Add(Me.txtPercent)
+        Me.Guna2Panel6.Controls.Add(Me.txtProfit)
         Me.Guna2Panel6.Controls.Add(Me.txtSellingPrice)
         Me.Guna2Panel6.Controls.Add(Me.txtPrice)
         Me.Guna2Panel6.Controls.Add(Me.txtBrand)
         Me.Guna2Panel6.Controls.Add(Me.txtMName)
-        Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel8)
         Me.Guna2Panel6.Controls.Add(Me.txtMCode)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel14)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel11)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel16)
-        Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel13)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel15)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel10)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel12)
+        Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel8)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel9)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel7)
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel6)
@@ -185,6 +187,8 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel6.Controls.Add(Me.Guna2HtmlLabel3)
         Me.Guna2Panel6.Controls.Add(Me.usernameTxt)
         Me.Guna2Panel6.Controls.Add(Me.Guna2PictureBox1)
+        Me.Guna2Panel6.Controls.Add(Me.SCR_Panel)
+        Me.Guna2Panel6.Controls.Add(Me.UDC_Panel)
         Me.Guna2Panel6.CustomBorderColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(50, Byte), Integer))
         Me.Guna2Panel6.CustomBorderThickness = New System.Windows.Forms.Padding(0, 2, 0, 0)
         Me.Guna2Panel6.Location = New System.Drawing.Point(3, 49)
@@ -192,109 +196,16 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel6.Size = New System.Drawing.Size(339, 871)
         Me.Guna2Panel6.TabIndex = 12
         '
-        'reloadBtn
+        'Guna2HtmlLabel13
         '
-        Me.reloadBtn.AutoRoundedCorners = True
-        Me.reloadBtn.BorderRadius = 15
-        Me.reloadBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.reloadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.reloadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.reloadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.reloadBtn.Enabled = False
-        Me.reloadBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.reloadBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.reloadBtn.ForeColor = System.Drawing.Color.White
-        Me.reloadBtn.Location = New System.Drawing.Point(217, 563)
-        Me.reloadBtn.Name = "reloadBtn"
-        Me.reloadBtn.Size = New System.Drawing.Size(90, 33)
-        Me.reloadBtn.TabIndex = 16
-        Me.reloadBtn.Text = "Reload"
-        '
-        'CancelBtn
-        '
-        Me.CancelBtn.AutoRoundedCorners = True
-        Me.CancelBtn.BorderRadius = 15
-        Me.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.CancelBtn.Enabled = False
-        Me.CancelBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
-        Me.CancelBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.CancelBtn.ForeColor = System.Drawing.Color.White
-        Me.CancelBtn.Location = New System.Drawing.Point(217, 602)
-        Me.CancelBtn.Name = "CancelBtn"
-        Me.CancelBtn.Size = New System.Drawing.Size(90, 33)
-        Me.CancelBtn.TabIndex = 16
-        Me.CancelBtn.Text = "Cancel"
-        '
-        'DeleteBtn
-        '
-        Me.DeleteBtn.AutoRoundedCorners = True
-        Me.DeleteBtn.BorderRadius = 15
-        Me.DeleteBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.DeleteBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.DeleteBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.DeleteBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.DeleteBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(53, Byte), Integer), CType(CType(69, Byte), Integer))
-        Me.DeleteBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.DeleteBtn.ForeColor = System.Drawing.Color.White
-        Me.DeleteBtn.Location = New System.Drawing.Point(121, 602)
-        Me.DeleteBtn.Name = "DeleteBtn"
-        Me.DeleteBtn.Size = New System.Drawing.Size(90, 33)
-        Me.DeleteBtn.TabIndex = 16
-        Me.DeleteBtn.Text = "Delete"
-        '
-        'ClearBtn
-        '
-        Me.ClearBtn.AutoRoundedCorners = True
-        Me.ClearBtn.BorderRadius = 15
-        Me.ClearBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.ClearBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.ClearBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.ClearBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.ClearBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(193, Byte), Integer), CType(CType(7, Byte), Integer))
-        Me.ClearBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.ClearBtn.ForeColor = System.Drawing.Color.Black
-        Me.ClearBtn.Location = New System.Drawing.Point(121, 563)
-        Me.ClearBtn.Name = "ClearBtn"
-        Me.ClearBtn.Size = New System.Drawing.Size(90, 33)
-        Me.ClearBtn.TabIndex = 16
-        Me.ClearBtn.Text = "Clear"
-        '
-        'UpdateBtn
-        '
-        Me.UpdateBtn.AutoRoundedCorners = True
-        Me.UpdateBtn.BorderRadius = 15
-        Me.UpdateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.UpdateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.UpdateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.UpdateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.UpdateBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(123, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.UpdateBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.UpdateBtn.ForeColor = System.Drawing.Color.White
-        Me.UpdateBtn.Location = New System.Drawing.Point(25, 602)
-        Me.UpdateBtn.Name = "UpdateBtn"
-        Me.UpdateBtn.Size = New System.Drawing.Size(90, 33)
-        Me.UpdateBtn.TabIndex = 16
-        Me.UpdateBtn.Text = "Update"
-        '
-        'saveBtn
-        '
-        Me.saveBtn.AutoRoundedCorners = True
-        Me.saveBtn.BorderRadius = 15
-        Me.saveBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
-        Me.saveBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
-        Me.saveBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
-        Me.saveBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
-        Me.saveBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(50, Byte), Integer))
-        Me.saveBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.saveBtn.ForeColor = System.Drawing.Color.White
-        Me.saveBtn.Location = New System.Drawing.Point(25, 563)
-        Me.saveBtn.Name = "saveBtn"
-        Me.saveBtn.Size = New System.Drawing.Size(90, 33)
-        Me.saveBtn.TabIndex = 16
-        Me.saveBtn.Text = "Save"
+        Me.Guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel13.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2HtmlLabel13.Location = New System.Drawing.Point(147, 280)
+        Me.Guna2HtmlLabel13.Name = "Guna2HtmlLabel13"
+        Me.Guna2HtmlLabel13.Size = New System.Drawing.Size(12, 22)
+        Me.Guna2HtmlLabel13.TabIndex = 18
+        Me.Guna2HtmlLabel13.Text = "₱"
         '
         'txtExprDate
         '
@@ -307,13 +218,31 @@ Partial Class FrmMedicineInv
         Me.txtExprDate.FillColor = System.Drawing.Color.White
         Me.txtExprDate.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtExprDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.txtExprDate.Location = New System.Drawing.Point(165, 394)
+        Me.txtExprDate.Location = New System.Drawing.Point(147, 357)
         Me.txtExprDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.txtExprDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.txtExprDate.Name = "txtExprDate"
-        Me.txtExprDate.Size = New System.Drawing.Size(155, 32)
+        Me.txtExprDate.Size = New System.Drawing.Size(181, 32)
         Me.txtExprDate.TabIndex = 8
         Me.txtExprDate.Value = New Date(2025, 8, 8, 1, 12, 38, 572)
+        '
+        'txtLowStockQty
+        '
+        Me.txtLowStockQty.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLowStockQty.AutoRoundedCorners = True
+        Me.txtLowStockQty.BackColor = System.Drawing.Color.Transparent
+        Me.txtLowStockQty.BorderRadius = 15
+        Me.txtLowStockQty.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtLowStockQty.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtLowStockQty.Location = New System.Drawing.Point(147, 439)
+        Me.txtLowStockQty.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.txtLowStockQty.Name = "txtLowStockQty"
+        Me.txtLowStockQty.Size = New System.Drawing.Size(181, 32)
+        Me.txtLowStockQty.TabIndex = 6
+        Me.txtLowStockQty.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtLowStockQty.UpDownButtonForeColor = System.Drawing.Color.White
+        Me.txtLowStockQty.UseTransparentBackground = True
         '
         'txtQuantity
         '
@@ -324,9 +253,10 @@ Partial Class FrmMedicineInv
         Me.txtQuantity.BorderRadius = 15
         Me.txtQuantity.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.txtQuantity.Location = New System.Drawing.Point(164, 438)
+        Me.txtQuantity.Location = New System.Drawing.Point(147, 401)
+        Me.txtQuantity.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.txtQuantity.Name = "txtQuantity"
-        Me.txtQuantity.Size = New System.Drawing.Size(156, 32)
+        Me.txtQuantity.Size = New System.Drawing.Size(181, 32)
         Me.txtQuantity.TabIndex = 6
         Me.txtQuantity.UpDownButtonFillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.txtQuantity.UpDownButtonForeColor = System.Drawing.Color.White
@@ -347,9 +277,9 @@ Partial Class FrmMedicineInv
         Me.txtMUnit.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.txtMUnit.ItemHeight = 30
         Me.txtMUnit.Items.AddRange(New Object() {"", "Unit", "Gram", "Miligram", "Liter", "Mililiter"})
-        Me.txtMUnit.Location = New System.Drawing.Point(163, 191)
+        Me.txtMUnit.Location = New System.Drawing.Point(147, 191)
         Me.txtMUnit.Name = "txtMUnit"
-        Me.txtMUnit.Size = New System.Drawing.Size(156, 36)
+        Me.txtMUnit.Size = New System.Drawing.Size(109, 36)
         Me.txtMUnit.StartIndex = 1
         Me.txtMUnit.TabIndex = 5
         '
@@ -368,9 +298,9 @@ Partial Class FrmMedicineInv
         Me.txtMType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.txtMType.ItemHeight = 30
         Me.txtMType.Items.AddRange(New Object() {"", "Type", "1", "2"})
-        Me.txtMType.Location = New System.Drawing.Point(163, 146)
+        Me.txtMType.Location = New System.Drawing.Point(147, 146)
         Me.txtMType.Name = "txtMType"
-        Me.txtMType.Size = New System.Drawing.Size(156, 36)
+        Me.txtMType.Size = New System.Drawing.Size(181, 36)
         Me.txtMType.StartIndex = 1
         Me.txtMType.TabIndex = 4
         '
@@ -380,7 +310,7 @@ Partial Class FrmMedicineInv
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtUnitValue.Animated = True
         Me.txtUnitValue.AutoRoundedCorners = True
-        Me.txtUnitValue.BorderRadius = 15
+        Me.txtUnitValue.BorderRadius = 17
         Me.txtUnitValue.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.txtUnitValue.DefaultText = ""
         Me.txtUnitValue.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
@@ -390,12 +320,12 @@ Partial Class FrmMedicineInv
         Me.txtUnitValue.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtUnitValue.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtUnitValue.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtUnitValue.Location = New System.Drawing.Point(163, 236)
+        Me.txtUnitValue.Location = New System.Drawing.Point(262, 191)
         Me.txtUnitValue.Name = "txtUnitValue"
         Me.txtUnitValue.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtUnitValue.PlaceholderText = "Value"
         Me.txtUnitValue.SelectedText = ""
-        Me.txtUnitValue.Size = New System.Drawing.Size(156, 32)
+        Me.txtUnitValue.Size = New System.Drawing.Size(66, 36)
         Me.txtUnitValue.TabIndex = 10
         '
         'TxtSupplier
@@ -414,38 +344,38 @@ Partial Class FrmMedicineInv
         Me.TxtSupplier.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.TxtSupplier.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.TxtSupplier.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.TxtSupplier.Location = New System.Drawing.Point(164, 476)
+        Me.TxtSupplier.Location = New System.Drawing.Point(147, 556)
         Me.TxtSupplier.Name = "TxtSupplier"
         Me.TxtSupplier.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.TxtSupplier.PlaceholderText = "Supplier"
         Me.TxtSupplier.SelectedText = ""
-        Me.TxtSupplier.Size = New System.Drawing.Size(156, 32)
+        Me.TxtSupplier.Size = New System.Drawing.Size(181, 32)
         Me.TxtSupplier.TabIndex = 10
         Me.TxtSupplier.Visible = False
         '
-        'txtPercent
+        'txtProfit
         '
-        Me.txtPercent.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtProfit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPercent.Animated = True
-        Me.txtPercent.AutoRoundedCorners = True
-        Me.txtPercent.BorderRadius = 15
-        Me.txtPercent.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.txtPercent.DefaultText = ""
-        Me.txtPercent.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
-        Me.txtPercent.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.txtPercent.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtPercent.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
-        Me.txtPercent.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtPercent.Font = New System.Drawing.Font("Segoe UI", 9.0!)
-        Me.txtPercent.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtPercent.Location = New System.Drawing.Point(191, 312)
-        Me.txtPercent.Name = "txtPercent"
-        Me.txtPercent.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
-        Me.txtPercent.PlaceholderText = "0.00"
-        Me.txtPercent.SelectedText = ""
-        Me.txtPercent.Size = New System.Drawing.Size(129, 32)
-        Me.txtPercent.TabIndex = 9
+        Me.txtProfit.Animated = True
+        Me.txtProfit.AutoRoundedCorners = True
+        Me.txtProfit.BorderRadius = 15
+        Me.txtProfit.Cursor = System.Windows.Forms.Cursors.IBeam
+        Me.txtProfit.DefaultText = ""
+        Me.txtProfit.DisabledState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer), CType(CType(208, Byte), Integer))
+        Me.txtProfit.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.txtProfit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtProfit.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(138, Byte), Integer))
+        Me.txtProfit.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtProfit.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.txtProfit.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.txtProfit.Location = New System.Drawing.Point(165, 275)
+        Me.txtProfit.Name = "txtProfit"
+        Me.txtProfit.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
+        Me.txtProfit.PlaceholderText = "0.00"
+        Me.txtProfit.SelectedText = ""
+        Me.txtProfit.Size = New System.Drawing.Size(164, 32)
+        Me.txtProfit.TabIndex = 9
         '
         'txtSellingPrice
         '
@@ -464,12 +394,12 @@ Partial Class FrmMedicineInv
         Me.txtSellingPrice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtSellingPrice.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtSellingPrice.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtSellingPrice.Location = New System.Drawing.Point(190, 350)
+        Me.txtSellingPrice.Location = New System.Drawing.Point(165, 313)
         Me.txtSellingPrice.Name = "txtSellingPrice"
         Me.txtSellingPrice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtSellingPrice.PlaceholderText = "0.00"
         Me.txtSellingPrice.SelectedText = ""
-        Me.txtSellingPrice.Size = New System.Drawing.Size(129, 32)
+        Me.txtSellingPrice.Size = New System.Drawing.Size(163, 32)
         Me.txtSellingPrice.TabIndex = 9
         '
         'txtPrice
@@ -488,12 +418,12 @@ Partial Class FrmMedicineInv
         Me.txtPrice.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtPrice.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtPrice.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtPrice.Location = New System.Drawing.Point(190, 274)
+        Me.txtPrice.Location = New System.Drawing.Point(165, 237)
         Me.txtPrice.Name = "txtPrice"
         Me.txtPrice.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtPrice.PlaceholderText = "0.00"
         Me.txtPrice.SelectedText = ""
-        Me.txtPrice.Size = New System.Drawing.Size(129, 32)
+        Me.txtPrice.Size = New System.Drawing.Size(163, 32)
         Me.txtPrice.TabIndex = 9
         '
         'txtBrand
@@ -512,12 +442,12 @@ Partial Class FrmMedicineInv
         Me.txtBrand.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtBrand.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtBrand.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtBrand.Location = New System.Drawing.Point(163, 105)
+        Me.txtBrand.Location = New System.Drawing.Point(147, 105)
         Me.txtBrand.Name = "txtBrand"
         Me.txtBrand.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtBrand.PlaceholderText = "Brand"
         Me.txtBrand.SelectedText = ""
-        Me.txtBrand.Size = New System.Drawing.Size(156, 32)
+        Me.txtBrand.Size = New System.Drawing.Size(181, 32)
         Me.txtBrand.TabIndex = 3
         '
         'txtMName
@@ -536,24 +466,13 @@ Partial Class FrmMedicineInv
         Me.txtMName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtMName.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtMName.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtMName.Location = New System.Drawing.Point(163, 66)
+        Me.txtMName.Location = New System.Drawing.Point(147, 66)
         Me.txtMName.Name = "txtMName"
         Me.txtMName.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtMName.PlaceholderText = "Medicine name"
         Me.txtMName.SelectedText = ""
-        Me.txtMName.Size = New System.Drawing.Size(156, 32)
+        Me.txtMName.Size = New System.Drawing.Size(181, 32)
         Me.txtMName.TabIndex = 2
-        '
-        'Guna2HtmlLabel8
-        '
-        Me.Guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(18, 241)
-        Me.Guna2HtmlLabel8.Name = "Guna2HtmlLabel8"
-        Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(83, 22)
-        Me.Guna2HtmlLabel8.TabIndex = 11
-        Me.Guna2HtmlLabel8.Text = "Unit Value :"
         '
         'txtMCode
         '
@@ -571,12 +490,12 @@ Partial Class FrmMedicineInv
         Me.txtMCode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.txtMCode.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.txtMCode.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.txtMCode.Location = New System.Drawing.Point(163, 25)
+        Me.txtMCode.Location = New System.Drawing.Point(147, 25)
         Me.txtMCode.Name = "txtMCode"
         Me.txtMCode.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.txtMCode.PlaceholderText = "Ex: M001"
         Me.txtMCode.SelectedText = ""
-        Me.txtMCode.Size = New System.Drawing.Size(156, 32)
+        Me.txtMCode.Size = New System.Drawing.Size(181, 32)
         Me.txtMCode.TabIndex = 1
         '
         'Guna2HtmlLabel14
@@ -584,18 +503,18 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel14.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel14.Location = New System.Drawing.Point(19, 317)
+        Me.Guna2HtmlLabel14.Location = New System.Drawing.Point(18, 280)
         Me.Guna2HtmlLabel14.Name = "Guna2HtmlLabel14"
-        Me.Guna2HtmlLabel14.Size = New System.Drawing.Size(63, 22)
+        Me.Guna2HtmlLabel14.Size = New System.Drawing.Size(49, 22)
         Me.Guna2HtmlLabel14.TabIndex = 11
-        Me.Guna2HtmlLabel14.Text = "Percent :"
+        Me.Guna2HtmlLabel14.Text = "Profit :"
         '
         'Guna2HtmlLabel11
         '
         Me.Guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel11.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(19, 481)
+        Me.Guna2HtmlLabel11.Location = New System.Drawing.Point(18, 561)
         Me.Guna2HtmlLabel11.Name = "Guna2HtmlLabel11"
         Me.Guna2HtmlLabel11.Size = New System.Drawing.Size(68, 22)
         Me.Guna2HtmlLabel11.TabIndex = 11
@@ -607,29 +526,18 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel16.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel16.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel16.Location = New System.Drawing.Point(18, 355)
+        Me.Guna2HtmlLabel16.Location = New System.Drawing.Point(17, 318)
         Me.Guna2HtmlLabel16.Name = "Guna2HtmlLabel16"
         Me.Guna2HtmlLabel16.Size = New System.Drawing.Size(95, 22)
         Me.Guna2HtmlLabel16.TabIndex = 11
         Me.Guna2HtmlLabel16.Text = "Selling Price :"
-        '
-        'Guna2HtmlLabel13
-        '
-        Me.Guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent
-        Me.Guna2HtmlLabel13.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Guna2HtmlLabel13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel13.Location = New System.Drawing.Point(172, 317)
-        Me.Guna2HtmlLabel13.Name = "Guna2HtmlLabel13"
-        Me.Guna2HtmlLabel13.Size = New System.Drawing.Size(16, 22)
-        Me.Guna2HtmlLabel13.TabIndex = 11
-        Me.Guna2HtmlLabel13.Text = "%"
         '
         'Guna2HtmlLabel15
         '
         Me.Guna2HtmlLabel15.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel15.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel15.Location = New System.Drawing.Point(172, 355)
+        Me.Guna2HtmlLabel15.Location = New System.Drawing.Point(147, 318)
         Me.Guna2HtmlLabel15.Name = "Guna2HtmlLabel15"
         Me.Guna2HtmlLabel15.Size = New System.Drawing.Size(12, 22)
         Me.Guna2HtmlLabel15.TabIndex = 11
@@ -640,7 +548,7 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel10.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel10.Location = New System.Drawing.Point(18, 279)
+        Me.Guna2HtmlLabel10.Location = New System.Drawing.Point(17, 242)
         Me.Guna2HtmlLabel10.Name = "Guna2HtmlLabel10"
         Me.Guna2HtmlLabel10.Size = New System.Drawing.Size(78, 22)
         Me.Guna2HtmlLabel10.TabIndex = 11
@@ -651,18 +559,29 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel12.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel12.Location = New System.Drawing.Point(172, 279)
+        Me.Guna2HtmlLabel12.Location = New System.Drawing.Point(147, 242)
         Me.Guna2HtmlLabel12.Name = "Guna2HtmlLabel12"
         Me.Guna2HtmlLabel12.Size = New System.Drawing.Size(12, 22)
         Me.Guna2HtmlLabel12.TabIndex = 11
         Me.Guna2HtmlLabel12.Text = "₱"
+        '
+        'Guna2HtmlLabel8
+        '
+        Me.Guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent
+        Me.Guna2HtmlLabel8.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Guna2HtmlLabel8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.Guna2HtmlLabel8.Location = New System.Drawing.Point(18, 444)
+        Me.Guna2HtmlLabel8.Name = "Guna2HtmlLabel8"
+        Me.Guna2HtmlLabel8.Size = New System.Drawing.Size(107, 22)
+        Me.Guna2HtmlLabel8.TabIndex = 11
+        Me.Guna2HtmlLabel8.Text = "Low Stock Qty :"
         '
         'Guna2HtmlLabel9
         '
         Me.Guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel9.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel9.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(19, 399)
+        Me.Guna2HtmlLabel9.Location = New System.Drawing.Point(18, 362)
         Me.Guna2HtmlLabel9.Name = "Guna2HtmlLabel9"
         Me.Guna2HtmlLabel9.Size = New System.Drawing.Size(90, 22)
         Me.Guna2HtmlLabel9.TabIndex = 11
@@ -673,7 +592,7 @@ Partial Class FrmMedicineInv
         Me.Guna2HtmlLabel7.BackColor = System.Drawing.Color.Transparent
         Me.Guna2HtmlLabel7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Guna2HtmlLabel7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(19, 443)
+        Me.Guna2HtmlLabel7.Location = New System.Drawing.Point(18, 406)
         Me.Guna2HtmlLabel7.Name = "Guna2HtmlLabel7"
         Me.Guna2HtmlLabel7.Size = New System.Drawing.Size(70, 22)
         Me.Guna2HtmlLabel7.TabIndex = 11
@@ -741,12 +660,137 @@ Partial Class FrmMedicineInv
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Guna2PictureBox1.Image = Global.POS_System.My.Resources.Resources.drugs_60
         Me.Guna2PictureBox1.ImageRotate = 0!
-        Me.Guna2PictureBox1.Location = New System.Drawing.Point(4, 690)
+        Me.Guna2PictureBox1.Location = New System.Drawing.Point(4, 618)
         Me.Guna2PictureBox1.Name = "Guna2PictureBox1"
-        Me.Guna2PictureBox1.Size = New System.Drawing.Size(332, 178)
+        Me.Guna2PictureBox1.Size = New System.Drawing.Size(332, 250)
         Me.Guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.Guna2PictureBox1.TabIndex = 17
         Me.Guna2PictureBox1.TabStop = False
+        '
+        'SCR_Panel
+        '
+        Me.SCR_Panel.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.SCR_Panel.Controls.Add(Me.saveBtn)
+        Me.SCR_Panel.Controls.Add(Me.ClearBtn)
+        Me.SCR_Panel.Controls.Add(Me.reloadBtn)
+        Me.SCR_Panel.Location = New System.Drawing.Point(33, 490)
+        Me.SCR_Panel.Name = "SCR_Panel"
+        Me.SCR_Panel.Size = New System.Drawing.Size(282, 44)
+        Me.SCR_Panel.TabIndex = 20
+        '
+        'saveBtn
+        '
+        Me.saveBtn.AutoRoundedCorners = True
+        Me.saveBtn.BorderRadius = 15
+        Me.saveBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.saveBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.saveBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.saveBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.saveBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(27, Byte), Integer), CType(CType(143, Byte), Integer), CType(CType(50, Byte), Integer))
+        Me.saveBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.saveBtn.ForeColor = System.Drawing.Color.White
+        Me.saveBtn.Location = New System.Drawing.Point(0, 5)
+        Me.saveBtn.Name = "saveBtn"
+        Me.saveBtn.Size = New System.Drawing.Size(90, 33)
+        Me.saveBtn.TabIndex = 16
+        Me.saveBtn.Text = "Save"
+        '
+        'ClearBtn
+        '
+        Me.ClearBtn.AutoRoundedCorners = True
+        Me.ClearBtn.BorderRadius = 15
+        Me.ClearBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.ClearBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.ClearBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.ClearBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.ClearBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(193, Byte), Integer), CType(CType(7, Byte), Integer))
+        Me.ClearBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.ClearBtn.ForeColor = System.Drawing.Color.Black
+        Me.ClearBtn.Location = New System.Drawing.Point(96, 5)
+        Me.ClearBtn.Name = "ClearBtn"
+        Me.ClearBtn.Size = New System.Drawing.Size(90, 33)
+        Me.ClearBtn.TabIndex = 16
+        Me.ClearBtn.Text = "Clear"
+        '
+        'reloadBtn
+        '
+        Me.reloadBtn.AutoRoundedCorners = True
+        Me.reloadBtn.BorderRadius = 15
+        Me.reloadBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.reloadBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.reloadBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.reloadBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.reloadBtn.Enabled = False
+        Me.reloadBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.reloadBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.reloadBtn.ForeColor = System.Drawing.Color.White
+        Me.reloadBtn.Location = New System.Drawing.Point(192, 5)
+        Me.reloadBtn.Name = "reloadBtn"
+        Me.reloadBtn.Size = New System.Drawing.Size(90, 33)
+        Me.reloadBtn.TabIndex = 16
+        Me.reloadBtn.Text = "Reload"
+        '
+        'UDC_Panel
+        '
+        Me.UDC_Panel.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.UDC_Panel.Controls.Add(Me.DeleteBtn)
+        Me.UDC_Panel.Controls.Add(Me.UpdateBtn)
+        Me.UDC_Panel.Controls.Add(Me.CancelBtn)
+        Me.UDC_Panel.Location = New System.Drawing.Point(33, 490)
+        Me.UDC_Panel.Name = "UDC_Panel"
+        Me.UDC_Panel.Size = New System.Drawing.Size(282, 44)
+        Me.UDC_Panel.TabIndex = 19
+        '
+        'DeleteBtn
+        '
+        Me.DeleteBtn.AutoRoundedCorners = True
+        Me.DeleteBtn.BorderRadius = 15
+        Me.DeleteBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.DeleteBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.DeleteBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.DeleteBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.DeleteBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(220, Byte), Integer), CType(CType(53, Byte), Integer), CType(CType(69, Byte), Integer))
+        Me.DeleteBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.DeleteBtn.ForeColor = System.Drawing.Color.White
+        Me.DeleteBtn.Location = New System.Drawing.Point(96, 5)
+        Me.DeleteBtn.Name = "DeleteBtn"
+        Me.DeleteBtn.Size = New System.Drawing.Size(90, 33)
+        Me.DeleteBtn.TabIndex = 16
+        Me.DeleteBtn.Text = "Delete"
+        '
+        'UpdateBtn
+        '
+        Me.UpdateBtn.AutoRoundedCorners = True
+        Me.UpdateBtn.BorderRadius = 15
+        Me.UpdateBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.UpdateBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.UpdateBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.UpdateBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.UpdateBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(123, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.UpdateBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.UpdateBtn.ForeColor = System.Drawing.Color.White
+        Me.UpdateBtn.Location = New System.Drawing.Point(0, 5)
+        Me.UpdateBtn.Name = "UpdateBtn"
+        Me.UpdateBtn.Size = New System.Drawing.Size(90, 33)
+        Me.UpdateBtn.TabIndex = 16
+        Me.UpdateBtn.Text = "Update"
+        '
+        'CancelBtn
+        '
+        Me.CancelBtn.AutoRoundedCorners = True
+        Me.CancelBtn.BorderRadius = 15
+        Me.CancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray
+        Me.CancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray
+        Me.CancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer), CType(CType(169, Byte), Integer))
+        Me.CancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer), CType(CType(141, Byte), Integer))
+        Me.CancelBtn.FillColor = System.Drawing.Color.FromArgb(CType(CType(108, Byte), Integer), CType(CType(117, Byte), Integer), CType(CType(125, Byte), Integer))
+        Me.CancelBtn.Font = New System.Drawing.Font("Segoe UI", 9.0!)
+        Me.CancelBtn.ForeColor = System.Drawing.Color.White
+        Me.CancelBtn.Location = New System.Drawing.Point(192, 5)
+        Me.CancelBtn.Name = "CancelBtn"
+        Me.CancelBtn.Size = New System.Drawing.Size(90, 33)
+        Me.CancelBtn.TabIndex = 16
+        Me.CancelBtn.Text = "Cancel"
         '
         'Guna2Panel4
         '
@@ -758,9 +802,9 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel4.BorderThickness = 2
         Me.Guna2Panel4.Controls.Add(Me.FullnameTxt)
         Me.Guna2Panel4.Controls.Add(Me.Guna2Panel3)
-        Me.Guna2Panel4.Location = New System.Drawing.Point(376, 3)
+        Me.Guna2Panel4.Location = New System.Drawing.Point(366, 3)
         Me.Guna2Panel4.Name = "Guna2Panel4"
-        Me.Guna2Panel4.Size = New System.Drawing.Size(939, 927)
+        Me.Guna2Panel4.Size = New System.Drawing.Size(957, 927)
         Me.Guna2Panel4.TabIndex = 15
         '
         'FullnameTxt
@@ -769,7 +813,7 @@ Partial Class FrmMedicineInv
         Me.FullnameTxt.BackColor = System.Drawing.Color.Transparent
         Me.FullnameTxt.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FullnameTxt.ForeColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.FullnameTxt.Location = New System.Drawing.Point(409, 6)
+        Me.FullnameTxt.Location = New System.Drawing.Point(418, 6)
         Me.FullnameTxt.Name = "FullnameTxt"
         Me.FullnameTxt.Size = New System.Drawing.Size(154, 34)
         Me.FullnameTxt.TabIndex = 11
@@ -789,7 +833,7 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel3.CustomBorderThickness = New System.Windows.Forms.Padding(0, 2, 0, 0)
         Me.Guna2Panel3.Location = New System.Drawing.Point(3, 49)
         Me.Guna2Panel3.Name = "Guna2Panel3"
-        Me.Guna2Panel3.Size = New System.Drawing.Size(933, 871)
+        Me.Guna2Panel3.Size = New System.Drawing.Size(951, 871)
         Me.Guna2Panel3.TabIndex = 12
         '
         'searchBtn
@@ -803,7 +847,7 @@ Partial Class FrmMedicineInv
         Me.searchBtn.ImageRotate = 0!
         Me.searchBtn.ImageSize = New System.Drawing.Size(28, 28)
         Me.searchBtn.IndicateFocus = True
-        Me.searchBtn.Location = New System.Drawing.Point(892, 8)
+        Me.searchBtn.Location = New System.Drawing.Point(910, 8)
         Me.searchBtn.Name = "searchBtn"
         Me.searchBtn.PressedState.ImageSize = New System.Drawing.Size(28, 28)
         Me.searchBtn.Size = New System.Drawing.Size(26, 32)
@@ -814,10 +858,11 @@ Partial Class FrmMedicineInv
         Me.DGV_MedicineList.AllowUserToAddRows = False
         Me.DGV_MedicineList.AllowUserToDeleteRows = False
         Me.DGV_MedicineList.AllowUserToOrderColumns = True
+        Me.DGV_MedicineList.AllowUserToResizeColumns = False
         Me.DGV_MedicineList.AllowUserToResizeRows = False
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
@@ -827,24 +872,24 @@ Partial Class FrmMedicineInv
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle2.ForeColor = System.Drawing.Color.White
         DataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(85, Byte), Integer), CType(CType(96, Byte), Integer), CType(CType(128, Byte), Integer))
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_MedicineList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.DGV_MedicineList.ColumnHeadersHeight = 40
+        Me.DGV_MedicineList.ColumnHeadersHeight = 50
         Me.DGV_MedicineList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle3.BackColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI Semibold", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         DataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DGV_MedicineList.DefaultCellStyle = DataGridViewCellStyle3
         Me.DGV_MedicineList.GridColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.DGV_MedicineList.Location = New System.Drawing.Point(13, 46)
+        Me.DGV_MedicineList.Location = New System.Drawing.Point(4, 46)
         Me.DGV_MedicineList.Name = "DGV_MedicineList"
         Me.DGV_MedicineList.ReadOnly = True
         Me.DGV_MedicineList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
@@ -857,8 +902,8 @@ Partial Class FrmMedicineInv
         DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DGV_MedicineList.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DGV_MedicineList.RowHeadersVisible = False
-        Me.DGV_MedicineList.RowTemplate.Height = 25
-        Me.DGV_MedicineList.Size = New System.Drawing.Size(905, 822)
+        Me.DGV_MedicineList.RowTemplate.Height = 35
+        Me.DGV_MedicineList.Size = New System.Drawing.Size(944, 822)
         Me.DGV_MedicineList.TabIndex = 2
         Me.DGV_MedicineList.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White
         Me.DGV_MedicineList.ThemeStyle.AlternatingRowsStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -872,13 +917,13 @@ Partial Class FrmMedicineInv
         Me.DGV_MedicineList.ThemeStyle.HeaderStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGV_MedicineList.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White
         Me.DGV_MedicineList.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        Me.DGV_MedicineList.ThemeStyle.HeaderStyle.Height = 40
+        Me.DGV_MedicineList.ThemeStyle.HeaderStyle.Height = 50
         Me.DGV_MedicineList.ThemeStyle.ReadOnly = True
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.BorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.ForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.DGV_MedicineList.ThemeStyle.RowsStyle.Height = 25
+        Me.DGV_MedicineList.ThemeStyle.RowsStyle.Height = 35
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(231, Byte), Integer), CType(CType(229, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.DGV_MedicineList.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(71, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(94, Byte), Integer))
         '
@@ -897,7 +942,7 @@ Partial Class FrmMedicineInv
         Me.searchText.FocusedState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.searchText.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.searchText.HoverState.BorderColor = System.Drawing.Color.FromArgb(CType(CType(94, Byte), Integer), CType(CType(148, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.searchText.Location = New System.Drawing.Point(738, 8)
+        Me.searchText.Location = New System.Drawing.Point(756, 8)
         Me.searchText.Name = "searchText"
         Me.searchText.PasswordChar = Global.Microsoft.VisualBasic.ChrW(0)
         Me.searchText.PlaceholderText = "Search Here..."
@@ -919,7 +964,7 @@ Partial Class FrmMedicineInv
         Me.searchType.ForeColor = System.Drawing.Color.FromArgb(CType(CType(68, Byte), Integer), CType(CType(88, Byte), Integer), CType(CType(112, Byte), Integer))
         Me.searchType.ItemHeight = 30
         Me.searchType.Items.AddRange(New Object() {"", "Search", "Code", "Name", "Brand", "Type", "Unit"})
-        Me.searchType.Location = New System.Drawing.Point(644, 6)
+        Me.searchType.Location = New System.Drawing.Point(662, 6)
         Me.searchType.Name = "searchType"
         Me.searchType.Size = New System.Drawing.Size(88, 36)
         Me.searchType.StartIndex = 1
@@ -930,7 +975,7 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Guna2Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Guna2Panel1.Name = "Guna2Panel1"
-        Me.Guna2Panel1.Size = New System.Drawing.Size(14, 942)
+        Me.Guna2Panel1.Size = New System.Drawing.Size(10, 942)
         Me.Guna2Panel1.TabIndex = 3
         '
         'confirmDelete
@@ -966,8 +1011,11 @@ Partial Class FrmMedicineInv
         Me.Guna2Panel5.PerformLayout()
         Me.Guna2Panel6.ResumeLayout(False)
         Me.Guna2Panel6.PerformLayout()
+        CType(Me.txtLowStockQty, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtQuantity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Guna2PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.SCR_Panel.ResumeLayout(False)
+        Me.UDC_Panel.ResumeLayout(False)
         Me.Guna2Panel4.ResumeLayout(False)
         Me.Guna2Panel4.PerformLayout()
         Me.Guna2Panel3.ResumeLayout(False)
@@ -1017,12 +1065,15 @@ Partial Class FrmMedicineInv
     Friend WithEvents reloadBtn As Guna.UI2.WinForms.Guna2Button
     Friend WithEvents txtQuantity As Guna.UI2.WinForms.Guna2NumericUpDown
     Friend WithEvents txtUnitValue As Guna.UI2.WinForms.Guna2TextBox
-    Friend WithEvents Guna2HtmlLabel8 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel7 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents txtPercent As Guna.UI2.WinForms.Guna2TextBox
+    Friend WithEvents txtProfit As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents txtSellingPrice As Guna.UI2.WinForms.Guna2TextBox
     Friend WithEvents Guna2HtmlLabel14 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel16 As Guna.UI2.WinForms.Guna2HtmlLabel
-    Friend WithEvents Guna2HtmlLabel13 As Guna.UI2.WinForms.Guna2HtmlLabel
     Friend WithEvents Guna2HtmlLabel15 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents Guna2HtmlLabel13 As Guna.UI2.WinForms.Guna2HtmlLabel
+    Friend WithEvents SCR_Panel As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents UDC_Panel As Guna.UI2.WinForms.Guna2Panel
+    Friend WithEvents txtLowStockQty As Guna.UI2.WinForms.Guna2NumericUpDown
+    Friend WithEvents Guna2HtmlLabel8 As Guna.UI2.WinForms.Guna2HtmlLabel
 End Class

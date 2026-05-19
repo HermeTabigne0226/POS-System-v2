@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -154,6 +154,27 @@ Namespace My
         Public ReadOnly Property POS_DBConnectionString3() As String
             Get
                 Return CType(Me("POS_DBConnectionString3"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=172.16.10.169;Initial Catalog=POS_DB;User ID=sa;Password=p@ssw0rd")>  _
+        Public ReadOnly Property POS_DBConnectionString4() As String
+            Get
+                Return CType(Me("POS_DBConnectionString4"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=172.16.10.169;Initial Catalog=POS_DB;Persist Security Info=True;User "& _ 
+            "ID=sa;Password=p@ssw0rd")>  _
+        Public ReadOnly Property POS_DBConnectionString5() As String
+            Get
+                Return CType(Me("POS_DBConnectionString5"),String)
             End Get
         End Property
     End Class

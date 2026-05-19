@@ -1191,7 +1191,7 @@ Namespace POS_DBDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
-            Me._connection.ConnectionString = Global.POS_System.My.MySettings.Default.POS_DBConnectionString3
+            Me._connection.ConnectionString = Global.POS_System.My.MySettings.Default.POS_DBConnectionString5
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
